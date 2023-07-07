@@ -33,7 +33,7 @@
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		 </div>
-        <input name="" class="form-control" placeholder="Full name" type="text">
+        <input name="" class="form-control" placeholder="Full name" type="text" id="name">
     </div> <!-- form-group// -->
     <div class="form-group input-group">
     	<div class="input-group-prepend">
@@ -88,6 +88,10 @@
 	<script>
 	let tg = window.Telegram.WebApp;
 	let submit = document.getElementById("submit");
+
+	window.onload = function() {
+ 	document.getElementById("name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+	};
 
 	submit.addEventListener("click", () => {
 	tg.close()
