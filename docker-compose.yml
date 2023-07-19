@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  flaskapp:
+    image: "flaskappbot"
+    container_name: flaskapp
+    entrypoint: /bin/bash
+    ports:
+    - 443:443
+    volumes:
+    - ./:/home
+    command: -c "python /home/botRegistration/app.py" 
+    # command: -c "cd /home/botRegistration" 
+    # command: -c "gunicorn --bind 0.0.0.0:5000 /home/botRegistration/app:app" 
+    restart: on-failure
