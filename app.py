@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request,redirect
 import dao.modelDao as dao
 import asyncio
-
+dao.db_start()
 app = Flask(__name__)
 
 @app.route("/")
@@ -24,7 +24,7 @@ def stepform():
         return render_template('stepform.html')
 
 if __name__=="__main__":
-    dao.db_start()
+
     app.run(host="0.0.0.0", port=5000, debug=True)
 
 
