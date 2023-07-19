@@ -25,7 +25,7 @@ def stepform():
 
 if __name__=="__main__":
     dao.db_start()
-    app.run(host="0.0.0.0", port=443, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
 
 
 
