@@ -35,6 +35,8 @@ def createservice():
         dao.create_service(request.form['service_name'], request.form['service_price'])
         service_list = dao.get_service()
         return render_template('service_list.html', service_list=service_list)
+    else:
+        return render_template('createservice.html')
 
 @app.route("/service_list", methods=['GET'])
 def service_list():
