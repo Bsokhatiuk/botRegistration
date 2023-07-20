@@ -13,13 +13,19 @@ exit
 <script>
 	let tg = window.Telegram.WebApp;
 	tg.expand();
+    tg.MainButton.color = "#2cab37";
+    tg.MainButton.show()
 
-	window.onload = function() {
- 		tg.WebApp.MainButton
-        .setText('CLOSE WEBVIEW')
-        .show()
-        .onClick(function(){ webviewClose(); });
-	};
+<!--	window.onload = function() {-->
+<!-- 		tg.WebApp.MainButton-->
+<!--        .setText('CLOSE WEBVIEW')-->
+<!--        .show()-->
+<!--        .onClick(function(){ webviewClose(); });-->
+<!--	};-->
+
+   window.Telegram.WebApp.onEvent("mainButtonClicked", function(){
+      tg.close();
+   });
 
 </script>
 {% endblock %}

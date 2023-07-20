@@ -68,7 +68,7 @@ async def help_command(message:types.Message):
 async def start_command(message:types.Message):
     text = """ save user data """
     await dao.create_user(message.from_user.id, message.from_user.first_name, message.from_user.last_name)
-    await bot.send_message(chat_id=message.from_user.id, text=text, parse_mode='HTML',reply_markup=kb)
+    await bot.send_message(chat_id=message.from_user.id, text=text, parse_mode='HTML',reply_markup=ikb)
 
 
 @dp.message_handler(commands=['contact'])
