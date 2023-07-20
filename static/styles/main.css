@@ -20,10 +20,10 @@ body{
             padding-bottom: 30px;
         }
         #signUpForm .form-header .stepIndicator.active {
-            font-weight: 600;
+            font-weight: 800;
         }
         #signUpForm .form-header .stepIndicator.finish {
-            font-weight: 600;
+            font-weight: 800;
             color: #009688;
         }
         #signUpForm .form-header .stepIndicator::before {
