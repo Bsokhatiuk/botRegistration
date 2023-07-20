@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+exit
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h4 class="title ">Регістація пройшла успушно!</h4>
+</div>>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+	let tg = window.Telegram.WebApp;
+	tg.expand();
+	tg.WebApp.MainButton
+        .setText('CLOSE WEBVIEW')
+        .show()
+        .onClick(function(){ webviewClose(); });
+</script>
+{% endblock %}

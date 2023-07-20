@@ -19,7 +19,7 @@ def stepform():
         house = request.form['house']
         password = request.form['password']
         dao.create_admin(123, org_name, mobile, password)
-        return redirect('/')
+        return redirect('/exit.html')
     else:
         return render_template('stepform.html')
 
