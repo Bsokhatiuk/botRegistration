@@ -35,7 +35,7 @@ Form step register
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-building" style="width:10%"></i> </span>
                 </div>
-                <input type="text" placeholder="Назва клініки" oninput="this.className = ''" name="org_name" style="width:85%">
+                <input type="text" placeholder="Назва клініки" oninput="this.className = ''" name="org_name" style="width:85%" id="reply">
             </div>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -110,6 +110,8 @@ Form step register
     </form>
 </div>
 <script>
+
+
 var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab
 
@@ -191,5 +193,15 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
   } else
     $('#message').html('Not Matching').css('color', 'red');
 });
+</script>
+<script>
+ $("#reply").on('keydown', function(e) {
+    var code = e.keyCode || e.which;
+      if(code == 13) { //Enter keycode
+       event.preventDefault();
+       var s = $(this).val();
+       $(this).val(s+"\n");
+      }
+ });
 </script>
 {% endblock %}

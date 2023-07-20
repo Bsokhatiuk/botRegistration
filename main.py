@@ -36,13 +36,13 @@ dp = Dispatcher(bot)
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 b1 = KeyboardButton("⚒help")
 b2 = KeyboardButton("start")
-b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://bsokhatiuk.github.io"))
+b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com"))
 b4 = KeyboardButton("qr")
 
 kb.add(b1).insert(b2).add(b3).add(b4)
 
 ikb = InlineKeyboardMarkup(row_width=2)
-ib1 = InlineKeyboardButton("site", web_app=WebAppInfo(url="https://bsokhatiuk.github.io"))
+ib1 = InlineKeyboardButton("site", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com"))
 ikb.add(ib1)
 HELP_COMMENDS = """
 <b>/start</b> - розпочати роботу бота
@@ -57,7 +57,7 @@ start_kb.row('Navigation Calendar', 'Dialog Calendar')
 reply_requests = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton("Отправить свой контакт", request_contact=True))
 reply_requests2 = InlineKeyboardMarkup().add(InlineKeyboardButton("Отправить свой контакт", request_contact=True))
 async def on_startup(_):
-    await dao.db_start()
+    await dao.db_start_asc()
 
 @dp.message_handler(text=['⚒help'])
 async def help_command(message:types.Message):
