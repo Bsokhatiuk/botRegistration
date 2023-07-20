@@ -4,7 +4,7 @@ body{
         #signUpForm {
             max-width: 900px;
             background-color: #ffffff;
-            margin: 40px auto;
+            margin: 20px auto;
             padding: 40px;
             box-shadow: 0px 6px 18px rgb(0 0 0 / 9%);
             border-radius: 12px;
@@ -20,10 +20,10 @@ body{
             padding-bottom: 30px;
         }
         #signUpForm .form-header .stepIndicator.active {
-            font-weight: 800;
+            font-weight: 600;
         }
         #signUpForm .form-header .stepIndicator.finish {
-            font-weight: 800;
+            font-weight: 600;
             color: #009688;
         }
         #signUpForm .form-header .stepIndicator::before {
@@ -88,7 +88,7 @@ body{
           display: none;
         }
         #signUpForm .form-footer{
-            overflow:auto;
+
             gap: 20px;
         }
         #signUpForm .form-footer button{
