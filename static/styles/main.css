@@ -68,17 +68,6 @@ body{
         #signUpForm span {
             width:20%
         }
-
-        #signUpForm select {
-            background-color: #009688;
-            border: 1px solid #009688 !important;
-            color: #ffffff;
-            border: none;
-        }
-        #signUpForm select:focus {
-            border: 1px solid #009688;
-            outline: 0;
-        }
         #signUpForm option {
             border : none;
         }

@@ -17,7 +17,7 @@ Form step register
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div class="container">
-<h5 class="text-center fs-4">Вітаємо! Зареєструйте, будь-ласка, вашу клініку </h5>
+<!--<h5 class="text-center fs-4">Вітаємо! Зареєструйте, будь-ласка, вашу клініку </h5>-->
     <form id="signUpForm"  method="post">
         <!-- start step indicators -->
         <div class="form-header d-flex mb-4">
@@ -32,19 +32,19 @@ Form step register
             <article class="card-body mx-auto" style="max-width: 400px;">
             <p class="text-center mb-4">Вкажіть назву клініки і номер телефону</p>
             <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fa fa-building" style="width:10%"></i> </span>
-                </div>
-                <input type="text" placeholder="Назва клініки" oninput="this.className = ''" name="org_name" style="width:85%" id="reply">
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text"> <i class="fa fa-building" style="width:10%"></i> </span>-->
+<!--                </div>-->
+                <input type="text" placeholder="Назва клініки" oninput="this.className = ''" name="org_name" style="width:100%" id="reply">
             </div>
             <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fa fa-phone" style="width:10%"></i> </span>
-                </div>
+<!--                <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text"> <i class="fa fa-phone" style="width:10%"></i> </span>-->
+<!--                </div>-->
                 <select style="width:20%; border: 1px solid #e3e3e3;border-radius: 5px;">
                     <option selected="">+380</option>
                 </select>
-                <input type="number" placeholder="Мобільний телефон" oninput="this.className = ''" name="mobile" style="width:65%">
+                <input type="number" placeholder="Мобільний телефон" oninput="this.className = ''" name="mobile" style="width:80%">
 
             </div>
             </article>
@@ -195,13 +195,10 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
 });
 </script>
 <script>
- $("#reply").on('keydown', function(e) {
-    var code = e.keyCode || e.which;
-      if(code == 13) { //Enter keycode
-       event.preventDefault();
-       var s = $(this).val();
-       $(this).val(s+"\n");
-      }
- });
+ $("#reply").keydown(function (e) {
+  if (e.keyCode == 13) {
+    e.preventDefault();
+  }
+});
 </script>
 {% endblock %}
