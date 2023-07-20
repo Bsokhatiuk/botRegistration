@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Додавання послуги
+{% endblock %}
+
+{% block body %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="container">
+    <div class="card">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+        <h4> Мої послуги</h4>
+    <form  method="post">
+        <input type="hidden" name="service_id" placeholder="Ціна в грн." value="{{service[0]}}" style="width:100%">
+        <div class="form-group ">
+            <input type="text" name="service_name" placeholder="Назва послуги" value="{{service[1]}}" style="width:100%">
+        </div>
+        <div class="form-group">
+            <input type="text" name="service_price" placeholder="Ціна в грн." value="{{service[2]}}" style="width:100%">
+        </div>
+
+        <button class="btn btn-success" type="submit">Оновити</button>
+    </form>
+    </article>
+    </div>
+</div>
+
+{% endblock %}
