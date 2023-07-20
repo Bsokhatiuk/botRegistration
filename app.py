@@ -9,6 +9,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route("/exit")
+def exit():
+    return render_template('exit.html')
+
+
 @app.route("/stepform", methods=['POST', 'GET'])
 def stepform():
     if request.method == "POST":
