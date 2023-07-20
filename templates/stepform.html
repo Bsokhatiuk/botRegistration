@@ -175,9 +175,9 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
 <script>
  $('#password, #confirm_password').on('keyup', function () {
   if ($('#password').val() == $('#confirm_password').val()) {
-    $('#message').html('Matching').css('color', '#009688');
+    $('#message').html('Співпадає').css('color', '#009688');
   } else
-    $('#message').html('Not Matching').css('color', 'red');
+    $('#message').html('Не співпадає').css('color', 'red');
 });
 </script>
 <script>

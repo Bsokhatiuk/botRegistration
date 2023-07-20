@@ -33,7 +33,8 @@ def stepform():
 def createservice():
     if request.method == "POST":
         dao.create_service(request.form['service_name'], request.form['service_price'])
-    return render_template('createservice.html')
+        service_list = dao.get_service()
+        return render_template('service_list.html', service_list=service_list)
 
 @app.route("/service_list", methods=['GET'])
 def service_list():
