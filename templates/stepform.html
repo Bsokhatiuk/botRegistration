@@ -28,14 +28,14 @@ Form step register
         <!-- end step indicators -->
 
         <!-- step one -->
-        <div class="step card bg-light">
-            <article class="card-body mx-auto" style="max-width: 500px;">
+        <div class="step card bg-light" onfocus="blur();"s>
+            <article class="card-body mx-auto" style="max-width: 500px;" onfocus="blur();">
             <p class="text-center mb-4">Вкажіть назву клініки і номер телефону</p>
-            <div class="form-group input-group">
+            <div class="form-group input-group" >
 <!--                <div class="input-group-prepend">-->
 <!--                    <span class="input-group-text"> <i class="fa fa-building" style="width:10%"></i> </span>-->
 <!--                </div>-->
-                <input type="text" placeholder="Назва клініки" oninput="this.className = ''" name="org_name" style="width:100%" id="reply" onfocus="blur();">
+                <input type="text" placeholder="Назва клініки" oninput="this.className = ''" name="org_name" style="width:100%" id="reply">
             </div>
             <div class="form-group input-group">
 <!--                <div class="input-group-prepend">-->
@@ -44,24 +44,24 @@ Form step register
                 <select style="width:20%; border: 1px solid #e3e3e3;border-radius: 5px;">
                     <option selected="">+380</option>
                 </select>
-                <input type="number" placeholder="Мобільний телефон" oninput="this.className = ''" name="mobile" style="width:80%" onfocus="blur();">
+                <input type="number" placeholder="Мобільний телефон" oninput="this.className = ''" name="mobile" style="width:80%" >
 
             </div>
             </article>
         </div>
 
         <!-- step two -->
-        <div class="step card bg-light">
+        <div class="step card bg-light" onfocus="blur();">
             <article class="card-body mx-auto" style="max-width: 500px;">
             <p class="text-center mb-4">Введить адресу вашої клініки</p>
             <div class="form-group input-group">
-                <input type="text" placeholder="Місто" oninput="this.className = ''" name="city" style="width:100%" onfocus="blur();">
+                <input type="text" placeholder="Місто" oninput="this.className = ''" name="city" style="width:100%">
             </div>
             <div class="form-group input-group">
-                <input type="text" placeholder="Вулиця" oninput="this.className = ''" name="street" style="width:100%" onfocus="blur();">
+                <input type="text" placeholder="Вулиця" oninput="this.className = ''" name="street" style="width:100%">
             </div>
             <div class="form-group input-group">
-                <input type="text" placeholder="Будинок №" oninput="this.className = ''" name="house" style="width:100%" onfocus="blur();">
+                <input type="text" placeholder="Будинок №" oninput="this.className = ''" name="house" style="width:100%" >
             </div>
             </article>
         </div>
