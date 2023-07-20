@@ -2,7 +2,7 @@ body{
             font-family: 'Open Sans', sans-serif;
         }
         #signUpForm {
-            max-width: 500px;
+            max-width: 900px;
             background-color: #ffffff;
             margin: 40px auto;
             padding: 40px;
@@ -73,7 +73,6 @@ body{
         }
         #signUpForm input {
             padding: 15px 20px;
-            width: 80%;
             font-size: 1em;
             border: 1px solid #e3e3e3;
             border-radius: 5px;
