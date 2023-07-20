@@ -9,7 +9,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/exit")
+@app.route("/exit", methods=['POST', 'GET'])
 def exit():
     return render_template('exit.html')
 
@@ -24,7 +24,7 @@ def stepform():
         house = request.form['house']
         password = request.form['password']
         dao.create_admin(123, org_name, mobile, password)
-        return redirect('/exit.html')
+        return redirect('/exit')
     else:
         return render_template('stepform.html')
 
