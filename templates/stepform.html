@@ -201,4 +201,40 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
   }
 });
 </script>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+	let tg = window.Telegram.WebApp;
+	let submit = document.getElementById("submit");
+
+	window.onload = function() {
+ 	document.getElementById("name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+	};
+	tg.expand();
+
+	submit.addEventListener("click", () => {
+	document.getElementById("error").innerText = '';
+	let name = document.getElementById("name").value;
+	let email = document.getElementById("email").value;
+	let phone = document.getElementById("phone").value;
+	let job = document.getElementById("job").value;
+	let password = document.getElementById("password").value;
+	let repeatpassword = document.getElementById("repeatpassword").value;
+	if (name.length < 5){
+		document.getElementById("error").innerText = "Ошибка в имени";
+		return;
+	}
+	let data = {
+        name: name,
+        email: email,
+        phone: phone,
+        job: job,
+        password: password
+	}
+	tg.sendData(JSON.stringify(data))
+	tg.close();
+	});
+
+
+</script>
 {% endblock %}

@@ -36,13 +36,13 @@ dp = Dispatcher(bot)
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 b1 = KeyboardButton("⚒help")
 b2 = KeyboardButton("start")
-b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com"))
+b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/stepform"))
 b4 = KeyboardButton("qr")
 
 kb.add(b1).insert(b2).add(b3).add(b4)
 
 ikb = InlineKeyboardMarkup(row_width=2)
-ib1 = InlineKeyboardButton("site", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com"))
+ib1 = InlineKeyboardButton("site", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/stepform"))
 ikb.add(ib1)
 HELP_COMMENDS = """
 <b>/start</b> - розпочати роботу бота
