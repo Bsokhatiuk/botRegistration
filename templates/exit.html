@@ -6,24 +6,19 @@ exit
 
 {% block body %}
 <div class="container">
-    <h4 class="title "> Регістація пройшла успушно!</h4>
+    <h4 class="title "> Регістація пройшла успішно!</h4>
 </div>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <script>
 	let tg = window.Telegram.WebApp;
 	tg.expand();
-    tg.MainButton.color = "#2cab37";
+	tg.MainButton.text = "Готово";
+    tg.MainButton.color = "#009688";
     tg.MainButton.show()
 
-<!--	window.onload = function() {-->
-<!-- 		tg.WebApp.MainButton-->
-<!--        .setText('CLOSE WEBVIEW')-->
-<!--        .show()-->
-<!--        .onClick(function(){ webviewClose(); });-->
-<!--	};-->
-
    window.Telegram.WebApp.onEvent("mainButtonClicked", function(){
+      tg.sendData("Регістація пройшла успушно");
       tg.close();
    });
 
