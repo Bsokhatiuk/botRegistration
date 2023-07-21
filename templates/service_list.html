@@ -44,4 +44,18 @@
     </div>
   </div>
 </div>
+
+<script>
+	let tg = window.Telegram.WebApp;
+	tg.expand();
+	tg.MainButton.text = "Готово";
+    tg.MainButton.color = "#009688";
+    tg.MainButton.show()
+
+   window.Telegram.WebApp.onEvent("mainButtonClicked", function(){
+      tg.sendData("Регістація пройшла успушно");
+      tg.close();
+   });
+
+</script>
 {% endblock %}
