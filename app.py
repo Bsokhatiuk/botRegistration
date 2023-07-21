@@ -11,10 +11,14 @@ from config import TOKEN_API
 bot = Bot(TOKEN_API)
 dp = Dispatcher(bot)
 
+loop = asyncio.get_event_loop()
+tasks = [loop.create_task(bot.send_message(chat_id=101375229, text='Hellow'))]
+
 
 @app.route("/")
 def index():
-    bot.send_message(chat_id=101375229, text='Hellow')
+    loop.run_until_complete(asyncio.wait(tasks))
+    loop.close()
     return render_template('index.html')
 
 
