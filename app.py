@@ -5,20 +5,20 @@ import asyncio
 dao.db_start()
 app = Flask(__name__)
 
-from aiogram import Bot, Dispatcher, types, executor
-from config import TOKEN_API
-
-bot = Bot(TOKEN_API)
-dp = Dispatcher(bot)
-
-loop = asyncio.get_event_loop()
-tasks = [loop.create_task(bot.send_message(chat_id=101375229, text='Hellow'))]
+# from aiogram import Bot, Dispatcher, types, executor
+# from config import TOKEN_API
+#
+# bot = Bot(TOKEN_API)
+# dp = Dispatcher(bot)
+#
+# loop = asyncio.get_event_loop()
+# tasks = [loop.create_task(bot.send_message(chat_id=101375229, text='Hellow'))]
 
 
 @app.route("/")
 def index():
-    loop.run_until_complete(asyncio.wait(tasks))
-    loop.close()
+    # loop.run_until_complete(asyncio.wait(tasks))
+    # loop.close()
     return render_template('index.html')
 
 
