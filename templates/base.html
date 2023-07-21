@@ -21,6 +21,15 @@
     tg.MainButton.show()
     tg.BackButton.show()
 
+    window.Telegram.WebApp.onEvent("mainButtonClicked", function(){
+      tg.close();
+   });
+
+
+    window.Telegram.WebApp.onEvent("backButtonClicked", function(){
+      window.history.back();
+   });
+
 
 </script>
 </body>
