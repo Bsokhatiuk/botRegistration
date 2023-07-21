@@ -24,7 +24,6 @@ QR = qrcode.QRCode(
 #     img.save(qr)
 
 bot = Bot(TOKEN_API)
-
 dp = Dispatcher(bot)
 # info = await bot.get_me()
 # name = info.username
