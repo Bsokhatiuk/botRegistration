@@ -13,23 +13,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div class="container">
-  <div class="row">
+  <div class="row" >
     <div class="col-12">
       <table class="table table-bordered">
         <thead>
           <tr>
             <th scope="col">ПІБ</th>
-            <th scope="col">Телефон</th>
             <th scope="col">Спеціалізація</th>
             <th scope="col">Дії</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
         {% for employee in employee_list  %}
           <tr>
-            <th scope="row">{{employee[1]}} </th>
-            <td>{{employee[2]}}</td>
-            <td>{{employee[3]}}</td>
+            <th scope="row" style="font-size: 12px;">{{employee[1]}} </th>
+            <td style="font-size: 12px;">{{employee[3]}}</td>
             <td>
               <a type="button" class="btn btn-success" href="/employee/{{employee[2]}}/upd"><i class="fas fa-edit"></i></a>
             <a type="button" class="btn btn-danger" href="/employee/{{employee[2]}}/del"><i class="far fa-trash-alt"></i></a>
