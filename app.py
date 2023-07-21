@@ -69,6 +69,38 @@ def service_update_bd():
     return render_template('serviceupdate.html')
 
 
+@app.route("/employeecreate", methods=['POST', 'GET'])
+def createemployee():
+    if request.method == "POST":
+        dao.create_employee(request.form['name'], request.form['phone'], request.form['specialization'])
+        employee_list = dao.get_employee_all()
+        return render_template('employee_list.html', employee_list=employee_list)
+    else:
+        return render_template('employeecreate.html')
+
+
+@app.route("/employee_list", methods=['POST', 'GET'])
+def employee_list():
+    employee_list = dao.get_employee_all()
+    return render_template('employee_list.html', employee_list=employee_list)
+
+@app.route("/employee/<phone>/del", methods=['GET', 'POST'])
+def employee_delete(phone):
+    dao.delete_employee(phone)
+    employee_list = dao.get_employee_all()
+    return render_template('employee_list.html', employee_list=employee_list)
+
+
+@app.route("/employee/<phone>/upd", methods=['GET', 'POST'])
+def employee_update(phone):
+    if request.method == "POST":
+        print(request.form['employee_id'])
+        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'])
+        employee_list = dao.get_employee_all()
+        return render_template('/employee_list.html', employee_list=employee_list)
+    else:
+        employee = dao.get_employee_by_phone(phone)
+        return render_template('/employee_update.html', employee= employee)
 if __name__=="__main__":
 
     app.run(host="0.0.0.0", port=5000, debug=True)

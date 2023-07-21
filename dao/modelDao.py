@@ -15,6 +15,8 @@ def db_start():
         "CREATE TABLE IF NOT EXISTS admins (user_id TEXT PRIMARY KEY, org_name TEXT, phone TEXT, password TEXT)")
     cur.execute(
         "CREATE TABLE IF NOT EXISTS service (service_id INTEGER PRIMARY KEY AUTOINCREMENT, service_name TEXT NOT NULL UNIQUE, price REAL)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS employee (employee_id INTEGER, name TEXT NOT NULL, phone TEXT, specialization TEXT, info TEXT, photo BLOB)")
     db.commit()
 
 
@@ -31,6 +33,8 @@ async def db_start_asc():
         "CREATE TABLE IF NOT EXISTS admins (user_id TEXT PRIMARY KEY, org_name TEXT, phone TEXT, password TEXT)")
     cur.execute(
         "CREATE TABLE IF NOT EXISTS service (service_id INTEGER PRIMARY KEY AUTOINCREMENT, service_name TEXT NOT NULL UNIQUE, price REAL)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS employee (employee_id INTEGER, name TEXT NOT NULL, phone TEXT, specialization TEXT, info TEXT, photo BLOB)")
     db.commit()
 
 
@@ -85,3 +89,33 @@ async def update_user_date(user_id, dater):
 def get_service_one(service_id):
     service = cur.execute("SELECT * FROM service WHERE service_id='{key}'".format(key=service_id)).fetchone()
     return service
+
+def create_employee(employee_name, phone, specialization, info="", photo=""):
+    employee = cur.execute("SELECT * FROM employee WHERE phone='{key}'".format(key=phone)).fetchone()
+    if not employee:
+        cur.execute("INSERT INTO employee VALUES (?, ?, ?, ?, ?, ?)", (-1, employee_name, phone, specialization, info, photo))
+        db.commit()
+
+
+def get_employee_all():
+    employee = cur.execute("SELECT * FROM employee").fetchall()
+    return employee
+
+
+def delete_employee(phone):
+    try:
+        cur.execute("DELETE FROM employee WHERE phone='{key}'".format(key=phone))
+        db.commit()
+    except Exception as err:
+        print(err)
+
+
+def update_employee(employee_name, phone, specialization, employee_id=-1, info="", photo=""):
+    cur.execute(
+        "UPDATE employee SET employee_id = ?, name = ?,specialization= ?, info= ?, photo =? WHERE phone = ?", (employee_id, employee_name, specialization, info, photo, phone))
+    db.commit()
+
+def get_employee_by_phone(phone):
+    employee = cur.execute("SELECT * FROM employee WHERE phone='{key}'".format(key=phone)).fetchone()
+    return employee
+

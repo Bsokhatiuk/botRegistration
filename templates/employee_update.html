@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Оновити дані
+{% endblock %}
+
+{% block body %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="container">
+    <div class="card">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+
+      <h4> Оновити інформацію про працівника</h4>
+    <form  method="post" class="form-floating">
+        <input type="hidden" name="employee_id" placeholder="Ціна в грн." value="{{employee[0]}}" style="width:100%">
+        <input type="hidden" name="info" placeholder="Ціна в грн." value="{{employee[4]}}" style="width:100%">
+        <input type="hidden" name="photo" placeholder="Ціна в грн." value="{{employee[5]}}" style="width:100%">
+      <div class="form-group input-group">
+            <label for="floatingInputValue">ПІБ:</label>
+            <input type="text" class="form-control" name="name" placeholder="Мосійчук Аліна Георгіївна" style="width:100%" id="floatingInputValue" value="{{employee[1]}}">
+      </div>
+        <div class="form-group input-group">
+            <label for="fspecialization">Спеціалізація:</label>
+            <input type="text" class="form-control" name="specialization" placeholder="Ортодонт" style="width:100%" id="fspecialization" value="{{employee[3]}}">
+
+        </div>
+
+        <div class="form-group input-group">
+          <label for="lphone">Номер телефону:</label>
+          <input type="text" class="form-control" name="phone" value="{{employee[2]}}" style="width:100%" id="lphone">
+
+        </div>
+
+        <button class="btn btn-success" type="submit">Оновити дані</button>
+    </form>
+    </article>
+              <div style="height: 50px;">
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
