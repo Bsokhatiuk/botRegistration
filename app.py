@@ -118,7 +118,7 @@ def employee_update(phone):
 @app.route("/login/<int:id>", methods=['POST', 'GET'])
 def login(id):
     if request.method == "POST":
-        return redirect("/profile/" + id +"/" + request.form['phone'])
+        return redirect("/profile/" + str(id) +"/" + request.form['phone'])
     return render_template('login.html', id=id)
 
 @app.route("/profile/<int:id>/<phone>", methods=['POST', 'GET'])
