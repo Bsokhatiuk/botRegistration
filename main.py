@@ -35,8 +35,8 @@ dp = Dispatcher(bot)
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 b1 = KeyboardButton("⚒help")
 b2 = KeyboardButton("start")
-b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/"))
-b4 = KeyboardButton("service",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/service_list"))
+b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login"))
+b4 = KeyboardButton("service",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/profile"))
 
 kb.add(b1).insert(b2).add(b3).add(b4)
 
