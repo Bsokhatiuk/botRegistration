@@ -57,7 +57,7 @@
       </div>
       <div class="form-group">
         <label for="email"> Пошта</label>
-        <input type="email" class="form-control" id="email" name="email"  required disabled>
+        <input type="email" class="form-control" id="email" name="email" value="{{employee[6]}}" required disabled>
       </div>
       <div class="form-group">
         <label for="profession">Професія</label>
@@ -65,11 +65,11 @@
       </div>
       <div class="form-group">
         <label for="about">Про себе</label>
-        <textarea class="form-control" id="about" name="about" rows="3" disabled></textarea>
+        <textarea class="form-control" id="about" name="about" value="{{employee[4]}}" rows="3" disabled></textarea>
       </div>
       <div class="form-group">
         <label for="photo">Завантажити фото</label>
-        <input type="file" class="form-control-file" id="photo" name="photo" disabled>
+        <input type="file" class="form-control-file" id="photo" name="photo"  disabled>
         <img id="photoPreview" src="#" alt="Preview" class="mt-2 img-thumbnail d-none">
       </div>
       <div class="form-group">

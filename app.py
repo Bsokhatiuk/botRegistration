@@ -130,6 +130,11 @@ def profile(id, phone):
     employee = dao.get_employee_by_phone(phone)
     return render_template('profile.html', employee= employee)
 
+
+@app.route("/calendar/<int:id>", methods=['POST', 'GET'])
+def calendar(id):
+    return render_template('calendar.html', id=id)
+
 if __name__=="__main__":
 
     app.run(host="0.0.0.0", port=5000, debug=True)

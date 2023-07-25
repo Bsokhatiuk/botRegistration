@@ -36,7 +36,7 @@ def get_keybord(id):
     b1 = KeyboardButton("⚒help")
     b2 = KeyboardButton("start")
     b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/"+str(id)))
-    b4 = KeyboardButton("service",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/profile"))
+    b4 = KeyboardButton("service",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/calendar/"+str(id)))
     kb.add(b1).insert(b2).add(b3).add(b4)
     return kb
 
