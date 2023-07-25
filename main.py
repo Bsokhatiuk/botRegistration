@@ -31,14 +31,15 @@ dp = Dispatcher(bot)
 # @dp.message_handler()
 # async def print(message:types.Message):
 #     await message.answer(text=message.from_user.id)
+def get_keybord(id):
+    kb = ReplyKeyboardMarkup(resize_keyboard=True)
+    b1 = KeyboardButton("⚒help")
+    b2 = KeyboardButton("start")
+    b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/"+str(id)))
+    b4 = KeyboardButton("service",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/profile"))
+    kb.add(b1).insert(b2).add(b3).add(b4)
+    return kb
 
-kb = ReplyKeyboardMarkup(resize_keyboard=True)
-b1 = KeyboardButton("⚒help")
-b2 = KeyboardButton("start")
-b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login"))
-b4 = KeyboardButton("service",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/profile"))
-
-kb.add(b1).insert(b2).add(b3).add(b4)
 
 ikb = InlineKeyboardMarkup(row_width=2)
 ib1 = InlineKeyboardButton("site", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/stepform"))
@@ -66,6 +67,7 @@ async def help_command(message:types.Message):
 @dp.message_handler(commands=['start'])
 async def start_command(message:types.Message):
     text = """ save user data """
+    kb =  get_keybord(message.from_user.id)
     await dao.create_user(message.from_user.id, message.from_user.first_name, message.from_user.last_name)
     await bot.send_message(chat_id=message.from_user.id, text=text, parse_mode='HTML',reply_markup=kb)
 

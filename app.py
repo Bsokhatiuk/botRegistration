@@ -107,7 +107,6 @@ def employee_delete(phone):
 @app.route("/employee/<phone>/upd", methods=['GET', 'POST'])
 def employee_update(phone):
     if request.method == "POST":
-        print(request.form['employee_id'])
         dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'])
         employee_list = dao.get_employee_all()
         return render_template('/employee_list.html', employee_list=employee_list)
@@ -116,13 +115,20 @@ def employee_update(phone):
         return render_template('/employee_update.html', employee= employee)
 
 
-@app.route("/login", methods=['POST', 'GET'])
-def login():
-    return render_template('login.html')
+@app.route("/login/<int:id>", methods=['POST', 'GET'])
+def login(id):
+    if request.method == "POST":
+        return redirect("/profile/" + id +"/" + request.form['phone'])
+    return render_template('login.html', id=id)
 
-@app.route("/profile", methods=['POST', 'GET'])
-def profile():
-    return render_template('profile.html')
+@app.route("/profile/<int:id>/<phone>", methods=['POST', 'GET'])
+def profile(id, phone):
+    if request.method == "POST":
+        print('hellow')
+        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
+                            id, request.form['about'], request.form['photo'], request.form['email'])
+    employee = dao.get_employee_by_phone(phone)
+    return render_template('profile.html', employee= employee)
 
 if __name__=="__main__":
 
