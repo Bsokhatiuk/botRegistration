@@ -114,6 +114,16 @@ def employee_update(phone):
     else:
         employee = dao.get_employee_by_phone(phone)
         return render_template('/employee_update.html', employee= employee)
+
+
+@app.route("/login", methods=['POST', 'GET'])
+def login():
+    return render_template('login.html')
+
+@app.route("/profile", methods=['POST', 'GET'])
+def profile():
+    return render_template('profile.html')
+
 if __name__=="__main__":
 
     app.run(host="0.0.0.0", port=5000, debug=True)
