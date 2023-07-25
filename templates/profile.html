@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile Settings</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    /* Style for the photo preview */
+    #photoPreview {
+      max-width: 150px;
+      max-height: 150px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: block;
+    }
+   #workScheduleSettings {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Профіль працівника</h1>
+    <form id="profileForm">
+      <div class="form-group">
+        <label for="name">ПІБ</label>
+        <input type="text" class="form-control" id="name" required disabled>
+      </div>
+      <div class="form-group">
+        <label for="phone">Телефон</label>
+        <input type="tel" class="form-control" id="phone" required disabled>
+      </div>
+      <div class="form-group">
+        <label for="email"> Пошта</label>
+        <input type="email" class="form-control" id="email" required disabled>
+      </div>
+      <div class="form-group">
+        <label for="profession">Професія</label>
+        <input type="text" class="form-control" id="profession" required disabled>
+      </div>
+      <div class="form-group">
+        <label for="about">Про себе</label>
+        <textarea class="form-control" id="about" rows="3" disabled></textarea>
+      </div>
+      <div class="form-group">
+        <label for="photo">Завантажити фото</label>
+        <input type="file" class="form-control-file" id="photo" disabled>
+        <img id="photoPreview" src="#" alt="Preview" class="mt-2 img-thumbnail d-none">
+      </div>
+      <div class="form-group">
+      <button type="button" class="btn btn-danger" id="detailsButton">Робочий графік</button>
+      </div>
+      <!-- Блок для налаштувань робочого графіку -->
+      <div id="workScheduleSettings">
+      <!-- Нова секція налаштувань робочих годин -->
+<!--      <h3>Робочий графік</h3>-->
+      <table>
+        <tr>
+          <th>День</th>
+          <th>Робочі години</th>
+        </tr>
+        <tr>
+          <td>Понеділок</td>
+          <td>
+            <input type="time" class="form-control" id="workHoursStartMon" disabled>
+            <span> to </span>
+            <input type="time" class="form-control" id="workHoursEndMon" disabled>
+            <input type="checkbox" class="form-check-input" id="weekendMon" value="1">
+            <label class="form-check-label" for="weekendMon">Weekend</label>
+          </td>
+        </tr>
+        <tr>
+          <td>Вівторок</td>
+          <td>
+            <input type="time" class="form-control" id="workHoursStartTr" disabled>
+            <span> to </span>
+            <input type="time" class="form-control" id="workHoursEndtr" disabled>
+            <input type="checkbox" class="form-check-input" id="weekendtr" value="2">
+            <label class="form-check-label" for="weekendMon">Weekend</label>
+          </td>
+        </tr>
+        <tr>
+        <td>Середа</td>
+          <td>
+            <input type="time" class="form-control" id="workHoursStartWen" disabled>
+            <span> to </span>
+            <input type="time" class="form-control" id="workHoursEndWen" disabled>
+            <input type="checkbox" class="form-check-input" id="weekendWen" value="3">
+            <label class="form-check-label" for="weekendMon">Weekend</label>
+          </td>
+        </tr>
+        <tr>
+        <td>Четвер</td>
+          <td>
+            <input type="time" class="form-control" id="workHoursStarttu" disabled>
+            <span> to </span>
+            <input type="time" class="form-control" id="workHoursEndtu" disabled>
+            <input type="checkbox" class="form-check-input" id="weekendtu" value="4">
+            <label class="form-check-label" for="weekendMon">Weekend</label>
+          </td>
+        </tr>
+        <tr>
+        <td>Пятниця</td>
+          <td>
+            <input type="time" class="form-control" id="workHoursStartfr" disabled>
+            <span> to </span>
+            <input type="time" class="form-control" id="workHoursEndfr" disabled>
+            <input type="checkbox" class="form-check-input" id="weekendfr" value="5">
+            <label class="form-check-label" for="weekendMon">Weekend</label>
+          </td>
+        </tr>
+        <tr>
+        <td>Субота</td>
+          <td>
+            <input type="time" class="form-control" id="workHoursStartst" disabled>
+            <span> to </span>
+            <input type="time" class="form-control" id="workHoursEndst" disabled>
+            <input type="checkbox" class="form-check-input" id="weekendst" value="6">
+            <label class="form-check-label" for="weekendMon">Weekend</label>
+          </td>
+        </tr>
+        <tr>
+          <td>Неділя</td>
+          <td>
+            <input type="time" class="form-control" id="workHoursStartSun" disabled>
+            <span> to </span>
+            <input type="time" class="form-control" id="workHoursEndSun" disabled>
+            <input type="checkbox" class="form-check-input" id="weekendSun" value="7">
+            <label class="form-check-label" for="weekendSun">Weekend</label>
+          </td>
+        </tr>
+        <!-- Додайте інші дні тижня тут... -->
+      </table>
+      </div>
+      <!-- Кнопки для редагування і збереження змін -->
+      <button type="button" class="btn btn-primary" id="editButton">Редагувати</button>
+      <button type="submit" class="btn btn-success d-none" id="saveButton">Зберегти зміни</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Show photo preview on file input change
+    $("#photo").change(function() {
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $("#photoPreview").attr("src", e.target.result).removeClass("d-none");
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    // Enable editing of form fields
+    $("#editButton").click(function() {
+      $("input, textarea, select").prop("disabled", false);
+      $("#editButton").addClass("d-none");
+      $("#saveButton").removeClass("d-none");
+    });
+
+    // Handle weekend days selection
+    $("#weekendSun, #weekendMon").change(function() {
+      var day = $(this).attr("id").replace("weekend", "");
+      if ($(this).is(":checked")) {
+        $("#workHoursStart" + day + ", #workHoursEnd" + day).prop("disabled", true);
+      } else {
+        $("#workHoursStart" + day + ", #workHoursEnd" + day).prop("disabled", false);
+      }
+    });
+
+    // Handle form submission
+    $("#profileForm").submit(function(event) {
+      event.preventDefault();
+      // Your logic to handle form submission (POST request) goes here
+      // ...
+      // After the successful save, disable the form fields again
+      $("input, textarea, select").prop("disabled", true);
+      $("#saveButton").addClass("d-none");
+      $("#editButton").removeClass("d-none");
+    });
+
+   $("#detailsButton").click(function() {
+      $("#workScheduleSettings").toggle();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Work Calendar</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    .table {
+      width: 100%;
+    }
+
+    .table th,
+    .table td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .table td {
+      height: 50px;
+    }
+
+    @media (max-width: 576px) {
+      .table td {
+        height: 60px;
+        font-size: 12px;
+      }
+    }
+
+    .editable {
+      cursor: pointer;
+    }
+
+    .bg-occupied {
+      background-color: #dc3545;
+    }
+
+    .bg-free {
+      background-color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Employee Work Calendar</h1>
+    <div>
+      <button id="addNextDayButton" class="btn btn-primary">Додати наступний день</button>
+    </div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th id="dateMonday"><br>2023-07-24</th>
+          <th id="dateTuesday">Tuesday<br>2023-07-25</th>
+          <th id="dateWednesday">Wednesday<br>2023-07-26</th>
+          <th id="dateThursday">Thursday<br>2023-07-27</th>
+          <th id="dateFriday">Friday<br>2023-07-28</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>09:00 - 10:00</td>
+          <td class="editable bg-free">Free</td>
+          <td class="editable bg-occupied">Occupied</td>
+          <td class="editable bg-free">Free</td>
+          <td class="editable bg-free">Free</td>
+          <td class="editable bg-occupied">Occupied</td>
+        </tr>
+        <!-- Add more rows for other hours -->
+      </tbody>
+    </table>
+    <button id="saveButton" class="btn btn-primary mt-2">Зберегти зміни</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Function to toggle between "Free" and "Occupied" statuses
+    function toggleStatus(cell) {
+      if (cell.textContent === "Free") {
+        cell.textContent = "Occupied";
+        cell.classList.remove("bg-free");
+        cell.classList.add("bg-occupied");
+      } else {
+        cell.textContent = "Free";
+        cell.classList.remove("bg-occupied");
+        cell.classList.add("bg-free");
+      }
+    }
+
+    // Add click event to editable cells
+    document.querySelectorAll(".editable").forEach(cell => {
+      cell.addEventListener("click", () => toggleStatus(cell));
+    });
+
+    // Update the dates in the table based on the offset
+    function updateTableDates(offset) {
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() + offset);
+
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById("dateMonday").innerHTML = `Monday<br>${currentDate.toLocaleDateString(undefined, options)}`;
+      currentDate.setDate(currentDate.getDate() + 1);
+      document.getElementById("dateTuesday").innerHTML = `Tuesday<br>${currentDate.toLocaleDateString(undefined, options)}`;
+      currentDate.setDate(currentDate.getDate() + 1);
+      document.getElementById("dateWednesday").innerHTML = `Wednesday<br>${currentDate.toLocaleDateString(undefined, options)}`;
+      currentDate.setDate(currentDate.getDate() + 1);
+      document.getElementById("dateThursday").innerHTML = `Thursday<br>${currentDate.toLocaleDateString(undefined, options)}`;
+      currentDate.setDate(currentDate.getDate() + 1);
+      document.getElementById("dateFriday").innerHTML = `Friday<br>${currentDate.toLocaleDateString(undefined, options)}`;
+    }
+
+    document.getElementById("addNextDayButton").addEventListener("click", function() {
+      const currentSliderValue = parseInt(document.getElementById("daySlider").value);
+      document.getElementById("daySlider").value = currentSliderValue + 1;
+      updateTableDates(currentSliderValue + 1);
+      // Вручну запускаємо подію "change" для слайдера
+      const changeEvent = new Event("change");
+      document.getElementById("daySlider").dispatchEvent(changeEvent);
+    });
+
+    // Initial setup on page load
+    updateTableDates(0);
+
+    // Save changes button functionality
+    document.getElementById("saveButton").addEventListener("click", function() {
+      const workHoursCells = document.querySelectorAll(".editable");
+      workHoursCells.forEach(cell => {
+        const status = cell.textContent;
+        // Тут можна відправити дані на сервер або виконати інші дії зі зміненими даними
+        console.log(`Date: ${cell.parentElement.cells[0].textContent}, Status: ${status}`);
+      });
+    });
+  </script>
+</body>
+</html>

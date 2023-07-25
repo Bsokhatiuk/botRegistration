@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сторінка входу</title>
+  <!-- Підключення Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Ваш власний CSS -->
+<!--  <link rel="stylesheet" href="styles.css">-->
+    <style>
+        body {
+  background-color: #f8f9fa;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-container">
+      <h2>Вхід</h2>
+      <form>
+        <div class="form-group">
+          <label for="username">Ім'я користувача</label>
+          <input type="text" class="form-control" id="username" placeholder="Введіть ім'я користувача">
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input type="password" class="form-control" id="password" placeholder="Введіть пароль">
+        </div>
+        <button type="submit" class="btn btn-primary">Увійти</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

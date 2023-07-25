@@ -115,8 +115,13 @@ body{
                 position: fixed;
                 height: 50px;
                 background-color: #696969;
+                opacity: 0.6;
                 bottom: 0px;
                 left: 0px;
                 right: 0px;
                 margin-bottom: 0px;
             }
+
+a:link, a:visited, a:hover, a:active{
+    text-decoration: none;
+}
