@@ -35,8 +35,8 @@ def get_keybord(id):
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
     b1 = KeyboardButton("⚒help")
     b2 = KeyboardButton("start")
-    b3 = KeyboardButton("view", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/"+str(id)))
-    b4 = KeyboardButton("service",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/calendar/"+str(id)))
+    b3 = KeyboardButton("menu", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/"))
+    b4 = KeyboardButton("login",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/"+str(id)))
     kb.add(b1).insert(b2).add(b3).add(b4)
     return kb
 
