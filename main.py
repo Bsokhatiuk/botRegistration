@@ -31,11 +31,11 @@ dp = Dispatcher(bot)
 # @dp.message_handler()
 # async def print(message:types.Message):
 #     await message.answer(text=message.from_user.id)
-def get_keybord(id, bot_username):
+def get_keybord(id, bot_username, id_bot):
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
     b1 = KeyboardButton("⚒help")
     b2 = KeyboardButton("start")
-    b3 = KeyboardButton("menu", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/index/" + bot_username + '/' + str(id)))
+    b3 = KeyboardButton("menu", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/stepform/" + bot_username + '/' +str(id_bot) + str(id)))
     b4 = KeyboardButton("login",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/" + bot_username + '/' + str(id)))
     kb.add(b1).insert(b2).add(b3).add(b4)
     return kb

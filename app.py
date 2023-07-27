@@ -16,13 +16,12 @@ app = Flask(__name__)
 # tasks = [loop.create_task(bot.send_message(chat_id=101375229, text='Hellow'))]
 
 
-@app.route("/index/<botusername>/<int:id>")
-def index(botusername, id):
-
+@app.route("/")
+def index():
     # loop.run_until_complete(asyncio.wait(tasks))
     # loop.close()
-    print(botusername.user_agent)
-    print(id)
+    # print(botusername.user_agent)
+    # print(id)
     print(request.user_agent)
     return render_template('index.html')
 
@@ -32,8 +31,8 @@ def exit():
     return render_template('exit.html')
 
 
-@app.route("/stepform", methods=['POST', 'GET'])
-def stepform():
+@app.route("/stepform/<botusername>/<bot_id>/<int:id>", methods=['POST', 'GET'])
+def stepform(botusername, bot_id, id):
     if request.method == "POST":
         org_name = request.form['org_name']
         mobile = request.form['mobile']
@@ -41,9 +40,10 @@ def stepform():
         street = request.form['street']
         house = request.form['house']
         password = request.form['password']
-        dao.create_admin(123, org_name, mobile, password)
+        dao.create_admin(id, org_name, mobile, password)
         return redirect('/exit')
     else:
+        print(botusername, bot_id, id)
         return render_template('stepform.html')
 
 
