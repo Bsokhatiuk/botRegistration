@@ -1,6 +1,7 @@
 import asyncio
 from flask import Flask, render_template, request,redirect
 import dao.modelDao as dao
+from flask import jsonify
 import asyncio
 dao.db_start()
 app = Flask(__name__)
@@ -15,10 +16,14 @@ app = Flask(__name__)
 # tasks = [loop.create_task(bot.send_message(chat_id=101375229, text='Hellow'))]
 
 
-@app.route("/")
-def index():
+@app.route("/index/<botusername>/<int:id>")
+def index(botusername, id):
+
     # loop.run_until_complete(asyncio.wait(tasks))
     # loop.close()
+    print(botusername.user_agent)
+    print(id)
+    print(request.user_agent)
     return render_template('index.html')
 
 
