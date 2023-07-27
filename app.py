@@ -40,7 +40,7 @@ def stepform(botusername, bot_id, id):
         street = request.form['street']
         house = request.form['house']
         password = request.form['password']
-        dao.create_admin(id, org_name, mobile, password)
+        dao.create_admin(id, org_name, mobile, password, botusername, bot_id)
         return redirect('/exit')
     else:
         print(botusername, bot_id, id)
