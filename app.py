@@ -149,7 +149,7 @@ def req(id):
         status=200,
         mimetype='application/json'
         )
-    return render_template('calendar.html', id=id)
+    return response
 
 if __name__=="__main__":
 

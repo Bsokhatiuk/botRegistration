@@ -68,7 +68,7 @@ async def help_command(message:types.Message):
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     r = requests.post(url, data=json.dumps(data), headers=headers)
     print(r)
-    print(r.json)
+    print(r.json())
     await bot.send_message(chat_id=message.from_user.id, text=r.json(), parse_mode='HTML')
     await message.delete()
 
