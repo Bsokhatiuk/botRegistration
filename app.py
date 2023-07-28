@@ -145,7 +145,7 @@ def calendar(id):
 def req(id):
     data = dao.get_employee_all()
     response = app.response_class(
-        response=json.dumps({'result':'fin'}),
+        response=json.dumps({'data':data}),
         status=200,
         mimetype='application/json'
         )
