@@ -1,6 +1,7 @@
 import asyncio
 from flask import Flask, render_template, request,redirect
 import dao.modelDao as dao
+import json
 from flask import jsonify
 import asyncio
 dao.db_start()
@@ -138,6 +139,16 @@ def profile(id, phone):
 
 @app.route("/calendar/<int:id>", methods=['POST', 'GET'])
 def calendar(id):
+    return render_template('calendar.html', id=id)
+
+@app.route("/req/<int:id>", methods=['POST'])
+def req(id):
+    data = dao.get_employee_all()
+    response = app.response_class(
+        response=json.dumps(data),
+        status=200,
+        mimetype='application/json'
+        )
     return render_template('calendar.html', id=id)
 
 if __name__=="__main__":

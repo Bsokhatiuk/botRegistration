@@ -11,6 +11,7 @@ from aiogram.dispatcher.filters import Text
 from aiogram_calendar.simple_calendar import calendar_callback as simple_cal_callback, SimpleCalendar
 from aiogram_calendar.dialog_calendar import calendar_callback as dialog_cal_callback, DialogCalendar
 import json
+import requests
 
 QR = qrcode.QRCode(
     version=None,
@@ -62,7 +63,11 @@ async def on_startup(_):
 @dp.message_handler(text=['⚒help'])
 async def help_command(message:types.Message):
     name = await bot.get_me()
-    await bot.send_message(chat_id=message.from_user.id, text=name, parse_mode='HTML')
+    url = "https://agile-tor-82473-26eff49ec440.herokuapp.com/stepform/" + str(name['id'])
+    data = {'sender': 'Alice', 'receiver': 'Bob', 'message': 'We did it!'}
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    r = requests.post(url, data=json.dumps(data), headers=headers)
+    await bot.send_message(chat_id=message.from_user.id, text=r.json(), parse_mode='HTML')
     await message.delete()
 
 @dp.message_handler(commands=['start'])
