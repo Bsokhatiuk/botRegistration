@@ -33,14 +33,14 @@
             <td>{{service[1]}}</td>
             <td>{{service[2]}}</td>
             <td>
-              <a type="button" class="btn btn-success" href="/service/{{service[0]}}/upd"><i class="fas fa-edit"></i></a>
-            <a type="button" class="btn btn-danger" href="/service/{{service[0]}}/del"><i class="far fa-trash-alt"></i></a>
+              <a type="button" class="btn btn-success" href="/service/{{botusername}}/{{service[0]}}/upd"><i class="fas fa-edit"></i></a>
+            <a type="button" class="btn btn-danger" href="/service/{{botusername}}/{{service[0]}}/del"><i class="far fa-trash-alt"></i></a>
             </td>
           </tr>
          {% endfor %}
         </tbody>
       </table>
-      <a class="btn btn-danger" id="insertRow" href="/createservice">Додати послугу</a>
+      <a class="btn btn-danger" id="insertRow" href="/createservice/{{botusername}}">Додати послугу</a>
     </div>
   </div>
 </div>

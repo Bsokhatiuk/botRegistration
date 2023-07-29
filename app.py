@@ -27,6 +27,15 @@ def index():
     return render_template('index.html')
 
 
+@app.route("/home/<botusername>/<bot_id>/<int:id>")
+def home(botusername, bot_id, id):
+    # loop.run_until_complete(asyncio.wait(tasks))
+    # loop.close()
+    # print(botusername.user_agent)
+    # print(id)
+    print(request.user_agent)
+    return render_template('index.html', botusername=botusername, bot_id=bot_id, id=id)
+
 @app.route("/exit", methods=['POST', 'GET'])
 def exit():
     return render_template('exit.html')
@@ -48,97 +57,97 @@ def stepform(botusername, bot_id, id):
         return render_template('stepform.html')
 
 
-@app.route("/createservice", methods=['POST', 'GET'])
-def createservice():
+@app.route("/createservice/<botusername>", methods=['POST', 'GET'])
+def createservice(botusername):
     if request.method == "POST":
-        dao.create_service(request.form['service_name'], request.form['service_price'])
+        dao.create_service(request.form['service_name'], request.form['service_price'], botusername)
         service_list = dao.get_service()
         return render_template('service_list.html', service_list=service_list)
     else:
         return render_template('createservice.html')
 
-@app.route("/service_list", methods=['GET'])
-def service_list():
-    service_list = dao.get_service()
+@app.route("/service_list/<botusername>", methods=['GET'])
+def service_list(botusername):
+    service_list = dao.get_service(botusername)
+    return render_template('service_list.html', service_list=service_list, botusername=botusername)
+
+@app.route("/service/<botusername>/<int:id>/del", methods=['GET', 'POST'])
+def service_delete(botusername, id):
+    dao.delete_service(id, botusername)
+    service_list = dao.get_service(botusername)
     return render_template('service_list.html', service_list=service_list)
 
-@app.route("/service/<int:id>/del", methods=['GET', 'POST'])
-def service_delete(id):
-    dao.delete_service(id)
-    service_list = dao.get_service()
-    return render_template('service_list.html', service_list=service_list)
-
-@app.route("/service/<int:id>/upd", methods=['GET', 'POST'])
-def service_update(id):
+@app.route("/service/<botusername>/<int:id>/upd", methods=['GET', 'POST'])
+def service_update(botusername, id):
     if request.method == "POST":
-        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'])
-        service_list = dao.get_service()
+        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], botusername)
+        service_list = dao.get_service(botusername)
         return render_template('/service_list.html', service_list=service_list)
     else:
-        service = dao.get_service_one(id)
+        service = dao.get_service_one(id, botusername)
         return render_template('/serviceupdate.html', service= service)
 
 
-@app.route("/serviceupdate", methods=['GET', 'POST'])
-def service_update_bd():
+@app.route("/serviceupdate/<botusername>", methods=['GET', 'POST'])
+def service_update_bd(botusername):
     if request.method == "POST":
-        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'])
-        service_list = dao.get_service()
+        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], botusername)
+        service_list = dao.get_service(botusername)
         return render_template('/service_list.html', service_list= service_list)
     return render_template('serviceupdate.html')
 
 
-@app.route("/employeecreate", methods=['POST', 'GET'])
-def createemployee():
+@app.route("/employeecreate/<botusername>", methods=['POST', 'GET'])
+def createemployee(botusername):
     if request.method == "POST":
-        dao.create_employee(request.form['name'], request.form['phone'], request.form['specialization'])
-        employee_list = dao.get_employee_all()
+        dao.create_employee(request.form['name'], request.form['phone'], request.form['specialization'], botusername)
+        employee_list = dao.get_employee_all(botusername)
         return render_template('employee_list.html', employee_list=employee_list)
     else:
         return render_template('employeecreate.html')
 
 
-@app.route("/employee_list", methods=['POST', 'GET'])
-def employee_list():
-    employee_list = dao.get_employee_all()
+@app.route("/employee_list/<botusername>", methods=['POST', 'GET'])
+def employee_list(botusername):
+    employee_list = dao.get_employee_all(botusername)
+    return render_template('employee_list.html', employee_list=employee_list, botusername=botusername)
+
+@app.route("/employee/<botusername>/<phone>/del", methods=['GET', 'POST'])
+def employee_delete(botusername, phone):
+    dao.delete_employee(phone, botusername)
+    employee_list = dao.get_employee_all(botusername)
     return render_template('employee_list.html', employee_list=employee_list)
 
-@app.route("/employee/<phone>/del", methods=['GET', 'POST'])
-def employee_delete(phone):
-    dao.delete_employee(phone)
-    employee_list = dao.get_employee_all()
-    return render_template('employee_list.html', employee_list=employee_list)
 
-
-@app.route("/employee/<phone>/upd", methods=['GET', 'POST'])
-def employee_update(phone):
+@app.route("/employee/<botusername>/<phone>/upd", methods=['GET', 'POST'])
+def employee_update(botusername, phone):
     if request.method == "POST":
-        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'])
-        employee_list = dao.get_employee_all()
+        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'], botusername)
+        employee_list = dao.get_employee_all(botusername)
         return render_template('/employee_list.html', employee_list=employee_list)
     else:
-        employee = dao.get_employee_by_phone(phone)
+        employee = dao.get_employee_by_phone(phone, botusername)
         return render_template('/employee_update.html', employee= employee)
 
 
-@app.route("/login/<int:id>", methods=['POST', 'GET'])
-def login(id):
+@app.route("/login/<botusername>/<int:id>", methods=['POST', 'GET'])
+def login(botusername, id):
     if request.method == "POST":
-        return redirect("/profile/" + str(id) +"/" + request.form['phone'])
+        return redirect("/profile/" + botusername +"/" + str(id) +"/" + request.form['phone'])
     return render_template('login.html', id=id)
 
-@app.route("/profile/<int:id>/<phone>", methods=['POST', 'GET'])
-def profile(id, phone):
+@app.route("/profile/<botusername>/<int:id>/<phone>", methods=['POST', 'GET'])
+def profile(botusername, id, phone):
     if request.method == "POST":
         print('hellow')
         dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
-                            id, request.form['about'], request.form['photo'], request.form['email'])
-    employee = dao.get_employee_by_phone(phone)
+                            id, request.form['about'], request.form['photo'], request.form['email'], botusername)
+    employee = dao.get_employee_by_phone(phone, botusername)
     return render_template('profile.html', employee= employee)
 
 
-@app.route("/calendar/<int:id>", methods=['POST', 'GET'])
-def calendar(id):
+@app.route("/calendar/<botusername>/<int:id>", methods=['POST', 'GET'])
+def calendar(botusername, id):
     return render_template('calendar.html', id=id)
 
 @app.route("/req/<int:id>", methods=['POST'])

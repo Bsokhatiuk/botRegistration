@@ -29,14 +29,14 @@
             <th scope="row" style="font-size: 12px;">{{employee[1]}} </th>
             <td style="font-size: 12px;">{{employee[3]}}</td>
             <td>
-              <a type="button" class="btn btn-success" href="/employee/{{employee[2]}}/upd"><i class="fas fa-edit"></i></a>
-            <a type="button" class="btn btn-danger" href="/employee/{{employee[2]}}/del"><i class="far fa-trash-alt"></i></a>
+              <a type="button" class="btn btn-success" href="/employee/{{botusername}}/{{employee[2]}}/upd"><i class="fas fa-edit"></i></a>
+            <a type="button" class="btn btn-danger" href="/employee/{{botusername}}/{{employee[2]}}/del"><i class="far fa-trash-alt"></i></a>
             </td>
           </tr>
          {% endfor %}
         </tbody>
       </table>
-      <a class="btn btn-danger" id="insertRow" href="/employeecreate">Додати нового працівника</a>
+      <a class="btn btn-danger" id="insertRow" href="/employeecreate/{{botusername}}">Додати нового працівника</a>
     </div>
   </div>
 </div>
