@@ -101,7 +101,7 @@ def service_update_bd(botusername):
 @app.route("/employeecreate/<botusername>", methods=['POST', 'GET'])
 def createemployee(botusername):
     if request.method == "POST":
-        dao.create_employee(request.form['name'], request.form['phone'], request.form['specialization'], botusername)
+        dao.create_employee(request.form['name'], request.form['phone'], request.form['specialization'], bot_username=botusername)
         employee_list = dao.get_employee_all(botusername)
         return render_template('employee_list.html', employee_list=employee_list)
     else:
