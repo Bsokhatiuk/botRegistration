@@ -136,6 +136,11 @@ def login(botusername, id, first_name, last_name):
     if request.method == "POST":
         return redirect("/profile/" + botusername +"/" + str(id) +"/" + request.form['phone'])
     else:
+        employees = dao.get_employee_phone_all(botusername)
+        for items in employees:
+            phone, _id = items
+            if _id == id:
+                return redirect("/profile/" + botusername + "/" + str(id) + "/" + phone)
         dao.create_user(id, first_name, last_name, bot_username=botusername)
         return render_template('login.html', botusername=botusername, id=id)
 

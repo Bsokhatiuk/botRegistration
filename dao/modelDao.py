@@ -90,6 +90,9 @@ def get_employee_all(bot_username=""):
     employee = cur.execute("SELECT * FROM employee where bot_username='{key}'".format(key=bot_username)).fetchall()
     return employee
 
+def get_employee_phone_all(bot_username=""):
+    employee = cur.execute("SELECT phone, employee_id FROM employee where bot_username='{key}'".format(key=bot_username)).fetchall()
+    return employee
 
 def delete_employee(phone, bot_username=""):
     try:
