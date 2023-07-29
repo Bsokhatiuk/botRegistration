@@ -116,16 +116,16 @@ def employee_list(botusername):
 @app.route("/employee/<botusername>/<phone>/del", methods=['GET', 'POST'])
 def employee_delete(botusername, phone):
     dao.delete_employee(phone, botusername)
-    employee_list = dao.get_employee_all(botusername)
-    return render_template('employee_list.html', employee_list=employee_list)
+    url = '/employee_list/' + botusername
+    return redirect(url)
 
 
 @app.route("/employee/<botusername>/<phone>/upd", methods=['GET', 'POST'])
 def employee_update(botusername, phone):
     if request.method == "POST":
         dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'], botusername)
-        employee_list = dao.get_employee_all(botusername)
-        return render_template('/employee_list.html', employee_list=employee_list)
+        url = '/employee_list/' + botusername
+        return redirect(url)
     else:
         employee = dao.get_employee_by_phone(phone, botusername)
         return render_template('/employee_update.html', employee= employee)

@@ -67,7 +67,7 @@ def delete_service(service_id, bot_username=''):
 
 def update_service(service_id, service_name, price, bot_username=''):
     cur.execute(
-        "UPDATE service SET service_name = ?, price= ?  WHERE service_id = ? amd bot_username = ?", (service_name, price, service_id, bot_username))
+        "UPDATE service SET service_name = ?, price= ?  WHERE service_id = ? and bot_username = ?", (service_name, price, service_id, bot_username))
     db.commit()
 
 
