@@ -53,7 +53,7 @@ def create_service(service_name, price, bot_username=''):
 
 
 def get_service(bot_username=''):
-    service = cur.execute("SELECT * FROM service WHERE bot_username="+bot_username).fetchall()
+    service = cur.execute("SELECT * FROM service WHERE bot_username='{key}'".format(key=bot_username)).fetchall()
     return service
 
 
@@ -98,7 +98,7 @@ def create_employee(employee_name, phone, specialization, info="", photo="", ema
 
 
 def get_employee_all(bot_username=""):
-    employee = cur.execute("SELECT * FROM employee where bot_username=" + bot_username).fetchall()
+    employee = cur.execute("SELECT * FROM employee where bot_username='{key}'".format(key=bot_username)).fetchall()
     return employee
 
 
