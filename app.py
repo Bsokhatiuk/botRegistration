@@ -131,11 +131,13 @@ def employee_update(botusername, phone):
         return render_template('/employee_update.html', employee= employee)
 
 
-@app.route("/login/<botusername>/<int:id>", methods=['POST', 'GET'])
-def login(botusername, id):
+@app.route("/login/<botusername>/<int:id>/<first_name>/<last_name>", methods=['POST', 'GET'])
+def login(botusername, id, first_name, last_name):
     if request.method == "POST":
         return redirect("/profile/" + botusername +"/" + str(id) +"/" + request.form['phone'])
-    return render_template('login.html', id=id)
+    else:
+        dao.create_user(id, first_name, last_name, bot_username=botusername)
+        return render_template('login.html', botusername=botusername, id=id)
 
 @app.route("/profile/<botusername>/<int:id>/<phone>", methods=['POST', 'GET'])
 def profile(botusername, id, phone):
