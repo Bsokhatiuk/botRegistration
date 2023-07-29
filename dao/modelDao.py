@@ -112,7 +112,7 @@ def delete_employee(phone, bot_username=""):
 
 def update_employee(employee_name, phone, specialization, employee_id=-1, info="", email="", photo="", bot_username=''):
     cur.execute(
-        "UPDATE employee SET employee_id = ?, name = ?,specialization= ?, info= ?, photo =?, email=? WHERE phone = ? and ", (employee_id, employee_name, specialization, info, photo, email, phone))
+        "UPDATE employee SET employee_id = ?, name = ?,specialization= ?, info= ?, photo =?, email=? WHERE phone = ? and bot_username = ?", (employee_id, employee_name, specialization, info, photo, email, phone, bot_username))
     db.commit()
 
 def get_employee_by_phone(phone, bot_username=''):

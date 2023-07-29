@@ -123,7 +123,7 @@ def employee_delete(botusername, phone):
 @app.route("/employee/<botusername>/<phone>/upd", methods=['GET', 'POST'])
 def employee_update(botusername, phone):
     if request.method == "POST":
-        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'], botusername)
+        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'], bot_username=botusername)
         url = '/employee_list/' + botusername
         return redirect(url)
     else:
