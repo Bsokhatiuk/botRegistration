@@ -61,8 +61,9 @@ def stepform(botusername, bot_id, id):
 def createservice(botusername):
     if request.method == "POST":
         dao.create_service(request.form['service_name'], request.form['service_price'], botusername)
-        service_list = dao.get_service()
-        return render_template('service_list.html', service_list=service_list)
+        # service_list = dao.get_service()
+        url = '/service_list/' + botusername
+        return redirect(url)
     else:
         return render_template('createservice.html')
 
@@ -74,15 +75,15 @@ def service_list(botusername):
 @app.route("/service/<botusername>/<int:id>/del", methods=['GET', 'POST'])
 def service_delete(botusername, id):
     dao.delete_service(id, botusername)
-    service_list = dao.get_service(botusername)
-    return render_template('service_list.html', service_list=service_list)
+    url = '/service_list/' + botusername
+    return redirect(url)
 
 @app.route("/service/<botusername>/<int:id>/upd", methods=['GET', 'POST'])
 def service_update(botusername, id):
     if request.method == "POST":
         dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], botusername)
-        service_list = dao.get_service(botusername)
-        return render_template('/service_list.html', service_list=service_list)
+        url = '/service_list/' + botusername
+        return redirect(url)
     else:
         service = dao.get_service_one(id, botusername)
         return render_template('/serviceupdate.html', service= service)
@@ -92,8 +93,8 @@ def service_update(botusername, id):
 def service_update_bd(botusername):
     if request.method == "POST":
         dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], botusername)
-        service_list = dao.get_service(botusername)
-        return render_template('/service_list.html', service_list= service_list)
+        url = '/service_list/' + botusername
+        return redirect(url)
     return render_template('serviceupdate.html')
 
 
