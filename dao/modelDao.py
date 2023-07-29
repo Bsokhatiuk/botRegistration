@@ -64,7 +64,7 @@ def create_user(user_id, first_name, last_name, role="USER", phone='', bot_usern
 
 
 def update_user_date(user_id, dater, bot_username=''):
-    cur.execute("UPDATE users_info SET last_date='{}' WHERE user_id='{}' and bot_username={}".format(dater, user_id, bot_username))
+    cur.execute("UPDATE users_info SET last_date='{key1}' WHERE user_id='{key2}' and bot_username={key3}".format(key1=dater, key2=user_id, key3=bot_username))
     db.commit()
 
 def update_user_phone(user_id, phone, bot_username=''):
