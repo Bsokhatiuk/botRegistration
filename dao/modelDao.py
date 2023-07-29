@@ -59,8 +59,8 @@ def create_user(user_id, first_name, last_name, role="USER", phone='', bot_usern
     if not user:
         cur.execute("INSERT INTO  users_info VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (user_id, first_name, last_name, dater, dater, role, phone, bot_username))
         db.commit()
-    else:
-        update_user_date(user_id, dater, bot_username)
+    # else:
+    #     update_user_date(user_id, dater, bot_username)
 
 
 def update_user_date(user_id, dater, bot_username=''):
