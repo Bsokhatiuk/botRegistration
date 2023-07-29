@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Сторінка входу</title>
-  <!-- Підключення Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Ваш власний CSS -->
-<!--  <link rel="stylesheet" href="styles.css">-->
-    <style>
+{% extends 'base.html' %}
+
+{% block title %}
+вхід
+{% endblock %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
         body {
   background-color: #f8f9fa;
 }
@@ -33,8 +29,7 @@
   font-weight: bold;
 }
     </style>
-</head>
-<body>
+{% block body %}
   <div class="container">
     <div class="login-container">
       <h2>Вхід</h2>
@@ -47,5 +42,4 @@
       </form>
     </div>
   </div>
-</body>
-</html>
+{% endblock %}
