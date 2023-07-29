@@ -144,6 +144,19 @@ def login(botusername, id, first_name, last_name):
         dao.create_user(id, first_name, last_name, bot_username=botusername)
         return render_template('login.html', botusername=botusername, id=id)
 
+@app.route("/login/<botusername>/<int:id>", methods=['POST', 'GET'])
+def login_short(botusername, id, first_name, last_name):
+    if request.method == "POST":
+        return redirect("/profile/" + botusername +"/" + str(id) +"/" + request.form['phone'])
+    else:
+        employees = dao.get_employee_phone_all(botusername)
+        for items in employees:
+            phone, _id = items
+            if _id == id:
+                return redirect("/profile/" + botusername + "/" + str(id) + "/" + phone)
+        dao.create_user(id, "first_name", "last_name", bot_username=botusername)
+        return render_template('login.html', botusername=botusername, id=id)
+
 @app.route("/profile/<botusername>/<int:id>/<phone>", methods=['POST', 'GET'])
 def profile(botusername, id, phone):
     if request.method == "POST":
