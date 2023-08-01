@@ -4,7 +4,7 @@ from config import TOKEN_API
 from aiogram.types import KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types.web_app_info import WebAppInfo
-import dao.modelDao as dao
+import dao.botDao as dao
 from aiogram.types import Message, CallbackQuery, ReplyKeyboardMarkup
 from aiogram.utils import executor
 from aiogram.dispatcher.filters import Text
@@ -38,7 +38,7 @@ def get_keybord(id, bot_username, id_bot, first_name, last_name):
     if len(last_name)<1:
         last_name="NULL"
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
-    b1 = KeyboardButton("⚒help")
+    b1 = KeyboardButton("Поділитись 📱 ", request_contact=True)
     b2 = KeyboardButton("start",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/" + bot_username + '/' + str(id)))
     b3 = KeyboardButton("menu", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/home/" + bot_username + '/' +str(id_bot) +"/"+ str(id)))
     b4 = KeyboardButton("login",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/" + bot_username + '/' + str(id) + '/' + first_name + '/' +last_name))
@@ -63,7 +63,7 @@ start_kb.row('Navigation Calendar', 'Dialog Calendar')
 reply_requests = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton("Отправить свой контакт", request_contact=True))
 reply_requests2 = InlineKeyboardMarkup().add(InlineKeyboardButton("Отправить свой контакт", request_contact=True))
 async def on_startup(_):
-    await dao.db_start_asc()
+    await dao.db_start()
 
 @dp.message_handler(text=['⚒help'])
 async def help_command(message:types.Message):
@@ -82,7 +82,7 @@ async def start_command(message:types.Message):
     text = """ save user data """
     name = await bot.get_me()
     kb =  get_keybord(message.from_user.id, name['username'], name['id'], message.from_user.first_name, message.from_user.last_name)
-    # await dao.create_user(message.from_user.id, message.from_user.first_name, message.from_user.last_name)
+    await dao.create_user(message.from_user.id, message.from_user.first_name, message.from_user.last_name)
     await bot.send_message(chat_id=message.from_user.id, text=text, parse_mode='HTML',reply_markup=kb)
 
 
@@ -96,6 +96,7 @@ async def contact_command(message:types.Message):
     text = """ Відправити контакт? """
     await bot.send_message(chat_id=message.from_user.id, text=text, parse_mode='HTML',reply_markup=reply_requests2)
     # await message.delete()
+
 @dp.message_handler(content_types=['web_app_data'])
 async def web_app_data_save(message:types.Message):
     res = json.loads(message.web_app_data.data)
@@ -131,6 +132,15 @@ async def process_simple_calendar(callback_query: CallbackQuery, callback_data: 
         )
 
 
+@dp.message_handler(content_types=types.ContentType.CONTACT)
+async def get_phone(message: Message):
+    phone = message.contact.phone_number
+    await dao.update_user_phone(message.from_user.id, phone)
+    await message.delete()
+    # await message.answer("Прийнято "+ str(phone))
+
+
+
 @dp.message_handler(Text(equals=['Dialog Calendar'], ignore_case=True))
 async def simple_cal_handler(message: Message):
     await message.answer("Please select a date: ", reply_markup=await DialogCalendar().start_calendar())
@@ -147,4 +157,4 @@ async def process_dialog_calendar(callback_query: CallbackQuery, callback_data: 
         )
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp, on_startup=on_startup, skip_updates=True)

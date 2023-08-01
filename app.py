@@ -145,7 +145,7 @@ def login(botusername, id, first_name, last_name):
         return render_template('login.html', botusername=botusername, id=id)
 
 @app.route("/login/<botusername>/<int:id>", methods=['POST', 'GET'])
-def login_short(botusername, id, first_name, last_name):
+def login_short(botusername, id):
     if request.method == "POST":
         return redirect("/profile/" + botusername +"/" + str(id) +"/" + request.form['phone'])
     else:
