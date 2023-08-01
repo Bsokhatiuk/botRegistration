@@ -43,8 +43,8 @@ def home(botusername, bot_id, id):
     # print(botusername.user_agent)
     # print(id)
     session['botusername'] = botusername
-    print(request.user_agent)
-    print(session)
+    print("-----------------------user_agent",request.user_agent, '----------------------------------')
+    print('request',request)
     return render_template('index.html', botusername=botusername, bot_id=bot_id, id=id)
 
 @app.route("/exit", methods=['POST', 'GET'])
