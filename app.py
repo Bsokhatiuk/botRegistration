@@ -44,6 +44,7 @@ def home(botusername, bot_id, id):
     # print(id)
     session['botusername'] = botusername
     print(request.user_agent)
+    print(session)
     return render_template('index.html', botusername=botusername, bot_id=bot_id, id=id)
 
 @app.route("/exit", methods=['POST', 'GET'])
@@ -79,7 +80,8 @@ def createservice(botusername):
 
 @app.route("/service_list/<botusername>", methods=['GET'])
 def service_list(botusername):
-    print(session['botusername'])
+    print(session)
+    # print(session['botusername'])
     service_list = dao.get_service(botusername)
     return render_template('service_list.html', service_list=service_list, botusername=botusername)
 
