@@ -1,12 +1,18 @@
 import asyncio
-from flask import Flask, render_template, request,redirect
+from flask import Flask, render_template, request,redirect, session
 import dao.modelDao as dao
 import json
 import logging
 from utils.loggingFilter import ContextualFilter
+import secrets
+
+
 
 dao.db_start()
 app = Flask(__name__)
+token = secrets.token_bytes(32)
+print(token)
+app.secret_key = token
 
 
 
@@ -36,6 +42,7 @@ def home(botusername, bot_id, id):
     # loop.close()
     # print(botusername.user_agent)
     # print(id)
+    session['botusername'] = botusername
     print(request.user_agent)
     return render_template('index.html', botusername=botusername, bot_id=bot_id, id=id)
 
@@ -72,6 +79,7 @@ def createservice(botusername):
 
 @app.route("/service_list/<botusername>", methods=['GET'])
 def service_list(botusername):
+    print(session['botusername'])
     service_list = dao.get_service(botusername)
     return render_template('service_list.html', service_list=service_list, botusername=botusername)
 
