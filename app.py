@@ -11,7 +11,6 @@ import secrets
 dao.db_start()
 app = Flask(__name__)
 token = secrets.token_bytes(32)
-print(token)
 app.secret_key = token
 
 
@@ -46,6 +45,7 @@ def home(botusername, bot_id, id):
     print("-----------------------user_agent",request.user_agent, '----------------------------------')
     print("-----------------------request",request.remote_addr, '----------------------------------')
     print("-----------------------environ", request.environ['REMOTE_ADDR'], '----------------------------------')
+    print("-----------------------HTTP_X_FORWARDED_FOR", request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), '----------------------------------')
     return render_template('index.html', botusername=botusername, bot_id=bot_id, id=id)
 
 @app.route("/exit", methods=['POST', 'GET'])
