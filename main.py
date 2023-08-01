@@ -77,6 +77,16 @@ async def help_command(message:types.Message):
     await bot.send_message(chat_id=message.from_user.id, text=r.json(), parse_mode='HTML')
     await message.delete()
 
+@dp.message_handler(text=['send_data'])
+async def help_command(message:types.Message):
+    name = await bot.get_me()
+    url = "https://agile-tor-82473-26eff49ec440.herokuapp.com/savedata"
+    data = {'user_id': message.from_user.id, 'first_name': message.from_user.first_name, 'last_name': message.from_user.last_name, 'bot_username':name['username']}
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    r = requests.get(url, data=json.dumps(data), headers=headers)
+    print(r)
+
+
 @dp.message_handler(commands=['start'])
 async def start_command(message:types.Message):
     text = """ save user data """
@@ -135,6 +145,11 @@ async def process_simple_calendar(callback_query: CallbackQuery, callback_data: 
 @dp.message_handler(content_types=types.ContentType.CONTACT)
 async def get_phone(message: Message):
     phone = message.contact.phone_number
+    name = await bot.get_me()
+    url = "https://agile-tor-82473-26eff49ec440.herokuapp.com/savedata"
+    data = {'user_id': message.from_user.id, 'first_name': message.from_user.first_name, 'last_name': message.from_user.last_name, 'bot_username':name['username'], 'phone':phone}
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    r = requests.get(url, data=json.dumps(data), headers=headers)
     await dao.update_user_phone(message.from_user.id, phone)
     await message.delete()
     # await message.answer("Прийнято "+ str(phone))

@@ -1,0 +1,26 @@
+2023-08-01 06:58:31,389 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.182:5000
+2023-08-01 06:58:31,390 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-08-01 06:58:31,397 INFO werkzeug MainThread :  * Restarting with stat
+2023-08-01 06:58:32,266 WARNING werkzeug MainThread :  * Debugger is active!
+2023-08-01 06:58:32,324 INFO werkzeug MainThread :  * Debugger PIN: 209-763-738
+2023-08-01 07:11:25,955 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.182:5000
+2023-08-01 07:11:25,963 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-08-01 07:11:25,965 INFO werkzeug MainThread :  * Restarting with stat
+2023-08-01 07:11:26,785 WARNING werkzeug MainThread :  * Debugger is active!
+2023-08-01 07:11:26,925 INFO werkzeug MainThread :  * Debugger PIN: 209-763-738
+2023-08-01 07:12:48,573 INFO werkzeug MainThread :  * Detected change in 'C:\\Users\\Lost\\Desktop\\telBot_or\\botRegistration\\app.py', reloading
+2023-08-01 07:12:49,181 INFO werkzeug MainThread :  * Restarting with stat
+2023-08-01 07:12:54,171 WARNING werkzeug MainThread :  * Debugger is active!
+2023-08-01 07:12:54,348 INFO werkzeug MainThread :  * Debugger PIN: 209-763-738
+2023-08-01 07:12:58,033 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [01/Aug/2023 07:12:58] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-01 07:13:01,006 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [01/Aug/2023 07:13:01] "GET / HTTP/1.1" 200 -
+2023-08-01 07:13:01,069 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [01/Aug/2023 07:13:01] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-01 07:13:16,622 WARNING app Thread-6 (process_request_thread) : Warning level log
+2023-08-01 07:13:16,742 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [01/Aug/2023 07:13:16] "GET /login/fff/3 HTTP/1.1" 200 -
+2023-08-01 07:13:16,811 INFO werkzeug Thread-7 (process_request_thread) : 127.0.0.1 - - [01/Aug/2023 07:13:16] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -

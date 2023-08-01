@@ -2,10 +2,13 @@ import asyncio
 from flask import Flask, render_template, request,redirect
 import dao.modelDao as dao
 import json
-from flask import jsonify
-import asyncio
+import logging
+from utils.loggingFilter import ContextualFilter
+
 dao.db_start()
 app = Flask(__name__)
+
+
 
 # from aiogram import Bot, Dispatcher, types, executor
 # from config import TOKEN_API
@@ -149,6 +152,7 @@ def login_short(botusername, id):
     if request.method == "POST":
         return redirect("/profile/" + botusername +"/" + str(id) +"/" + request.form['phone'])
     else:
+        app.logger.warning('Warning level log')
         employees = dao.get_employee_phone_all(botusername)
         for items in employees:
             phone, _id = items
@@ -178,6 +182,17 @@ def req(id):
         response=json.dumps({'data':data}),
         status=200,
         mimetype='application/json'
+        )
+    return response
+
+@app.route("/savedata", methods=['GET'])
+def savedata():
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        json = request.json
+        print(json)
+    response = app.response_class(
+        status=200,
         )
     return response
 
