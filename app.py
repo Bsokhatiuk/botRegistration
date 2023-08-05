@@ -105,18 +105,10 @@ def createservice(botusername):
         url = '/service_list/' + botusername
         return redirect(url)
     else:
-        check = 1
-        if 'check' in session:
-            check = session['check']
-            session['check'] = 0
-        return render_template('createservice.html', register_check=check)
+        return render_template('createservice.html')
 
 @app.route("/service_list/<botusername>", methods=['GET'])
 def service_list(botusername):
-    check = 1
-    if 'check' in session:
-        check = session['check']
-        session['check'] = 0
     session['botusername'] = botusername
     if 'history' in session:
         history = session['history']
@@ -130,7 +122,7 @@ def service_list(botusername):
     new_service_list = []
     for service in service_list:
         new_service_list.append((service[0], service[1],  int(service[2]),  service[3]))
-    return render_template('service_list.html', service_list=new_service_list, botusername=botusername, register_check=check)
+    return render_template('service_list.html', service_list=new_service_list, botusername=botusername)
 
 @app.route("/service/<botusername>/<int:id>/del", methods=['GET', 'POST'])
 def service_delete(botusername, id):
@@ -150,10 +142,6 @@ def service_delete(botusername, id):
 @app.route("/service/<botusername>/<int:id>/upd", methods=['GET', 'POST'])
 def service_update(botusername, id):
     session['botusername'] = botusername
-    check = 1
-    if 'check' in session:
-        check = session['check']
-        session['check'] = 0
     if 'history' in session:
         history = session['history']
         history.append(request.endpoint)
@@ -191,10 +179,6 @@ def service_update_bd(botusername):
 
 @app.route("/employeecreate/<botusername>", methods=['POST', 'GET'])
 def createemployee(botusername):
-    check = 1
-    if 'check' in session:
-        check = session['check']
-        session['check'] = 0
     session['botusername'] = botusername
     if 'history' in session:
         history = session['history']
@@ -214,10 +198,6 @@ def createemployee(botusername):
 
 @app.route("/employee_list/<botusername>", methods=['POST', 'GET'])
 def employee_list(botusername):
-    check = 1
-    if 'check' in session:
-        check = session['check']
-        session['check'] = 0
     session['botusername'] = botusername
     if 'history' in session:
         history = session['history']
@@ -228,7 +208,7 @@ def employee_list(botusername):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     employee_list = dao.get_employee_all(botusername)
-    return render_template('employee_list.html', employee_list=employee_list, botusername=botusername, register_check=check)
+    return render_template('employee_list.html', employee_list=employee_list, botusername=botusername)
 
 @app.route("/employee/<botusername>/<phone>/del", methods=['GET', 'POST'])
 def employee_delete(botusername, phone):
