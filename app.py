@@ -79,7 +79,7 @@ def stepform(botusername, bot_id, id):
         house = request.form['house']
         password = request.form['password']
         dao.create_admin(id, org_name, mobile, password, botusername, bot_id)
-        return redirect('/exit')
+        return redirect('/createservice/' + botusername)
     else:
         print(botusername, bot_id, id)
         return render_template('stepform.html')
