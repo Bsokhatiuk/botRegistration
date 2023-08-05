@@ -17,6 +17,8 @@ def db_start():
         "CREATE TABLE IF NOT EXISTS service (service_id INTEGER PRIMARY KEY AUTOINCREMENT, service_name TEXT NOT NULL UNIQUE, price REAL, bot_username TEXT)")
     cur.execute(
         "CREATE TABLE IF NOT EXISTS employee (employee_id INTEGER, name TEXT NOT NULL, phone TEXT, specialization TEXT, info TEXT, photo BLOB, email TEXT, bot_username TEXT)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS register_check (check_regform INTEGER, check_service INTEGER, check_employee INTEGER, bot_username TEXT)")
     db.commit()
 
 
@@ -25,6 +27,28 @@ def create_admin(user_id, org_name, phone, password, bot_username, bot_id):
     if not user:
         cur.execute("INSERT INTO  admins VALUES (?, ?, ?, ?, ?, ?)", (user_id, org_name, phone, password, bot_username, bot_id))
         db.commit()
+
+def create_register_check(bot_username):
+    user = cur.execute("SELECT * FROM register_check WHERE bot_username='{key}'".format(key=bot_username)).fetchone()
+    if not user:
+        cur.execute("INSERT INTO register_check VALUES (?, ?, ?, ?)", (0, 0, 0, bot_username))
+        db.commit()
+
+def set_register_check(bot_username, step):
+    name_check = 'check_regform'
+    if step == 0:
+        name_check = 'check_regform'
+    elif step == 1:
+        name_check = 'check_service'
+    elif step == 2:
+        name_check = 'check_employee'
+
+    cur.execute("UPDATE register_check SET " + name_check + " = ?  WHERE bot_username = ?", (1, bot_username))
+    db.commit()
+
+def get_register_check(bot_username=''):
+    register_check = cur.execute("SELECT * FROM register_check WHERE bot_username='{key}'".format(key=bot_username)).fetchone()
+    return register_check
 
 
 def create_service(service_name, price, bot_username=''):

@@ -79,6 +79,7 @@ def stepform(botusername, bot_id, id):
         house = request.form['house']
         password = request.form['password']
         dao.create_admin(id, org_name, mobile, password, botusername, bot_id)
+        session['check'] = 0
         return redirect('/createservice/' + botusername)
     else:
         print(botusername, bot_id, id)
@@ -87,6 +88,7 @@ def stepform(botusername, bot_id, id):
 
 @app.route("/createservice/<botusername>", methods=['POST', 'GET'])
 def createservice(botusername):
+    check = 1
     session['botusername'] = botusername
     if 'history' in session:
         history = session['history']
@@ -96,17 +98,21 @@ def createservice(botusername):
     session['history'] = history
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+
     if request.method == "POST":
         dao.create_service(request.form['service_name'], request.form['service_price'], botusername)
         # service_list = dao.get_service()
+        session['check']=0
         url = '/service_list/' + botusername
         return redirect(url)
     else:
-        return render_template('createservice.html')
+        if 'check' in session:
+            check = session['check']
+        return render_template('createservice.html', register_check=check)
 
 @app.route("/service_list/<botusername>", methods=['GET'])
 def service_list(botusername):
-
+    check = 1
     session['botusername'] = botusername
     if 'history' in session:
         history = session['history']
@@ -118,9 +124,11 @@ def service_list(botusername):
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     service_list = dao.get_service(botusername)
     new_service_list = []
+    if 'check' in session:
+        check = session['check']
     for service in service_list:
         new_service_list.append((service[0], service[1],  int(service[2]),  service[3]))
-    return render_template('service_list.html', service_list=new_service_list, botusername=botusername)
+    return render_template('service_list.html', service_list=new_service_list, botusername=botusername, register_check=check)
 
 @app.route("/service/<botusername>/<int:id>/del", methods=['GET', 'POST'])
 def service_delete(botusername, id):
