@@ -121,7 +121,11 @@ def service_list(botusername):
     service_list = dao.get_service(botusername)
     new_service_list = []
     for service in service_list:
-        new_service_list.append((service[0], service[1],  int(service[2]),  service[3]))
+        try:
+            new_service_list.append((service[0], service[1],  int(service[2]),  service[3]))
+        except Exception as err:
+            print(err)
+            new_service_list.append((service[0], service[1], service[2], service[3]))
     return render_template('service_list.html', service_list=new_service_list, botusername=botusername)
 
 @app.route("/service/<botusername>/<int:id>/del", methods=['GET', 'POST'])
