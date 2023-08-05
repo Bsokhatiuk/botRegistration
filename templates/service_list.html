@@ -15,35 +15,36 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Послуга</th>
-            <th scope="col">Ціна</th>
-            <th scope="col">Дії</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for service in service_list  %}
-          <tr>
-            <th scope="row">{{service[0]}} </th>
-<!--            <td>{{service.service_name}}</td>-->
-<!--            <td>{{service.service_price}}</td>-->
-            <td>{{service[1]}}</td>
-            <td>{{service[2]}}</td>
-            <td>
-              <a type="button" class="btn btn-success" href="/service/{{botusername}}/{{service[0]}}/upd"><i class="fas fa-edit"></i></a>
-            <a type="button" class="btn btn-danger" href="/service/{{botusername}}/{{service[0]}}/del"><i class="far fa-trash-alt"></i></a>
-            </td>
-          </tr>
-         {% endfor %}
-        </tbody>
-      </table>
-      <a class="btn btn-danger" id="insertRow" href="/createservice/{{botusername}}">Додати послугу</a>
+      <div class="table-responsive table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th scope="col">ID</th>-->
+              <th scope="col">Послуга</th>
+              <th scope="col">Ціна</th>
+              <th scope="col">Дії</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for service in service_list  %}
+            <tr>
+              <!-- <th scope="row">{{service[0]}} </th> -->
+              <!-- <td>{{service.service_name}}</td> -->
+              <!-- <td>{{service.service_price}}</td> -->
+              <td>{{service[1]}}</td>
+              <td>{{service[2]}}</td>
+              <td>
+                <a type="button" class="btn btn-light" href="/service/{{botusername}}/{{service[0]}}/upd"><i class="fas fa-edit"></i></a>
+                <a type="button" class="btn btn-light" href="/service/{{botusername}}/{{service[0]}}/del"><i class="far fa-trash-alt"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <a class="btn" id="insertRow" href="/createservice/{{botusername}}" style="background-color:#009688; color: white;">Додати послугу</a>
     </div>
   </div>
 </div>
-
 
 {% endblock %}

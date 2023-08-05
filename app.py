@@ -117,7 +117,10 @@ def service_list(botusername):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     service_list = dao.get_service(botusername)
-    return render_template('service_list.html', service_list=service_list, botusername=botusername)
+    new_service_list = []
+    for service in service_list:
+        new_service_list.append((service[0], service[1],  int(service[2]),  service[3]))
+    return render_template('service_list.html', service_list=new_service_list, botusername=botusername)
 
 @app.route("/service/<botusername>/<int:id>/del", methods=['GET', 'POST'])
 def service_delete(botusername, id):

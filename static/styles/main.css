@@ -100,7 +100,7 @@ body{
             cursor: pointer;
             border-radius: 5px;
             flex: 1;
-            margin-top: 5px;
+            margin-top: 15px;
         }
         #signUpForm .form-footer button:hover {
           opacity: 0.8;
