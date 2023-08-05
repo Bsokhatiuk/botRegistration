@@ -173,11 +173,19 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
 
 </script>
 <script>
- $('#password, #confirm_password').on('keyup', function () {
-  if ($('#password').val() == $('#confirm_password').val()) {
-    $('#message').html('Співпадає').css('color', '#009688');
-  } else
-    $('#message').html('Не співпадає').css('color', 'red');
+$('#password, #confirm_password').on('keyup', function () {
+  var passwordValue = $('#password').val();
+  var confirmPasswordValue = $('#confirm_password').val();
+
+  if (passwordValue.length === confirmPasswordValue.length) {
+    if (passwordValue === confirmPasswordValue) {
+      $('#message').html('Співпадає').css('color', '#009688');
+    } else {
+      $('#message').html('Не співпадає').css('color', 'red');
+    }
+  } else {
+    $('#message').html('Довжина паролів не співпадає').css('color', 'red');
+  }
 });
 </script>
 <script>
