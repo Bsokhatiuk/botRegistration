@@ -177,14 +177,14 @@ $('#password, #confirm_password').on('keyup', function () {
   var passwordValue = $('#password').val();
   var confirmPasswordValue = $('#confirm_password').val();
 
-  if (passwordValue.length === confirmPasswordValue.length) {
+  if (passwordValue.length > 4 && passwordValue.length === confirmPasswordValue.length) {
     if (passwordValue === confirmPasswordValue) {
       $('#message').html('Співпадає').css('color', '#009688');
     } else {
       $('#message').html('Не співпадає').css('color', 'red');
     }
   } else {
-    $('#message').html('Довжина паролів не співпадає').css('color', 'red');
+    $('#message').html('').css('color', 'transparent');
   }
 });
 </script>
