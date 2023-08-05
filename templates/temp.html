@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивний календар</title>
+    <!-- Підключення Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Підключення Bootstrap Datepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Підключення локалізації для української мови -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.uk.min.js"></script>
+
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1>Календар</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="calendar"></div>
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-md-6">
+                <input type="hidden" class="form-control" id="selected-dates">
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary" id="select-btn">Обрати</button>
+        </div>
+    </div>
+</div>
+
+<!-- Підключення Bootstrap та jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Підключення Bootstrap Datepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Ініціалізація календаря
+        $('#calendar').datepicker({
+            multidate: true,
+            format: 'yyyy-mm-dd',
+            todayHighlight: true
+        });
+
+
+
+        // Оновлення значення вибраних дат при зміні
+        $('#calendar').on('changeDate', function() {
+            var selectedDates = $('#calendar').datepicker('getFormattedDate');
+            $('#selected-dates').val(selectedDates);
+        });
+    });
+</script>
+
+</body>
+</html>

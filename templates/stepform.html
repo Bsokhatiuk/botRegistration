@@ -4,7 +4,7 @@
 Form step register
 {% endblock %}
 {% block style %}
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/styles/main.css') }}">
 {% endblock %}
 
 
@@ -17,7 +17,7 @@ Form step register
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<div class="container">
+<div class="container" style="top:0">
 <!--<h5 class="text-center fs-4">Вітаємо! Зареєструйте, будь-ласка, вашу клініку </h5>-->
     <form id="signUpForm"  method="post">
         <!-- start step indicators -->
@@ -87,8 +87,8 @@ Form step register
 
         <!-- start previous / next buttons -->
         <div class="form-footer d-flex">
-            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Повернутись</button>
-            <button type="button" id="nextBtn" onclick="nextPrev(1)">Далі</button>
+            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn-block m-0">Повернутись</button>
+            <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn-block m-0">Далі</button>
         </div>
         <div style="height: 50px;">
         </div>
@@ -186,15 +186,6 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
     e.preventDefault();
   }
 });
-</script>
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script>
-	let tg = window.Telegram.WebApp;
-	tg.expand();
-	window.onload = function() {
- 	document.getElementById("reply").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
-	};
 </script>
 
 {% endblock %}
