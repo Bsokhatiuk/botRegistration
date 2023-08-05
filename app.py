@@ -55,7 +55,7 @@ def home(botusername, bot_id, id):
     # print("-----------------------HTTP_X_FORWARDED_FOR", request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr), '----------------------------------')
     return render_template('index.html', botusername=botusername, bot_id=bot_id, id=id)
 
-@app.route("/exit", methods=['POST', 'GET'])
+@app.route("/exit/<botusername>", methods=['POST', 'GET'])
 def exit():
     return render_template('exit.html')
 

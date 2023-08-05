@@ -41,6 +41,9 @@
       </table>
       </div>
       <a class="btn" id="insertRow" href="/employeecreate/{{botusername}}" style="background-color:#009688; color: white;">Додати нового працівника</a>
+      {% if register_check==0 %}
+      <a class="btn"  href="/exit/{{botusername}}" style="background-color:#009688; color: white;">Готово</a>
+      {% endif %}
     </div>
   </div>
 </div>
