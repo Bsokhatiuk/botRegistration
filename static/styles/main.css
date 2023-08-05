@@ -4,7 +4,7 @@ body{
         #signUpForm {
             max-width: 500px;
             background-color: #ffffff;
-            margin: 40px auto;
+            margin: 10px auto;
             padding: 40px;
             box-shadow: 0px 6px 18px rgb(0 0 0 / 9%);
             border-radius: 12px;
@@ -17,7 +17,7 @@ body{
         #signUpForm .form-header .stepIndicator {
             position: relative;
             flex: 1;
-            padding-bottom: 30px;
+            padding-bottom: 5px;
         }
         #signUpForm .form-header .stepIndicator.active {
             font-weight: 600;
@@ -100,7 +100,7 @@ body{
             cursor: pointer;
             border-radius: 5px;
             flex: 1;
-            margin-top: 5px;
+            margin-top: 10px;
         }
         #signUpForm .form-footer button:hover {
           opacity: 0.8;
