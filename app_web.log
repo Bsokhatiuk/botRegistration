@@ -147,3 +147,78 @@
 2023-08-05,10:33:14,180 root INFO botusername='dd'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
 2023-08-05,10:33:14,191 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:33:14] "GET /service_list/dd HTTP/1.1" 200 -
 2023-08-05,10:33:14,217 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:33:14] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:36:59,452 root INFO botusername='dd'; id_user='3'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list/home';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:36:59,459 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:36:59] "GET /home/dd/2/3 HTTP/1.1" 200 -
+2023-08-05,10:36:59,510 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:36:59] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:37:00,606 root INFO botusername='dd'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list/home/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:37:00,617 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:37:00] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:37:00,661 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:37:00] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:37:13,423 root INFO botusername='dd'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list/home/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:37:13,431 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:37:13] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:37:13,463 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:37:13] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:38:00,71 root INFO botusername='dd'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list/home/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:38:00,81 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:00] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:38:00,117 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:00] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:38:06,152 root INFO botusername='dd'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list/home/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:38:06,160 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:06] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:38:06,189 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:06] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:38:14,499 root INFO botusername='dd'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list/home/employee_list/employee_list/employee_list/employee_list/createemployee';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:38:14,506 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:14] "GET /employeecreate/dd HTTP/1.1" 200 -
+2023-08-05,10:38:14,546 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:14] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:38:23,194 root INFO botusername='dd'; path='service_list/service_update/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/createservice/createservice/service_list/service_list/home/employee_list/employee_list/employee_list/employee_list/createemployee/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:38:23,204 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:23] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:38:23,243 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:38:23] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:54:05,413 werkzeug INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.182:5000
+2023-08-05,10:54:05,413 werkzeug INFO [33mPress CTRL+C to quit[0m
+2023-08-05,10:54:05,416 werkzeug INFO  * Restarting with stat
+2023-08-05,10:54:06,158 werkzeug WARNING  * Debugger is active!
+2023-08-05,10:54:06,169 werkzeug INFO  * Debugger PIN: 209-763-738
+2023-08-05,10:54:10,728 root INFO botusername='dd'; path='employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:54:10,745 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:10] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:54:10,877 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:10] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:54:15,74 root INFO botusername='dd'; id_user='3'; path='employee_list/home';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:54:15,80 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:15] "GET /home/dd/2/3 HTTP/1.1" 200 -
+2023-08-05,10:54:16,611 root INFO botusername='dd'; path='employee_list/home/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:54:16,613 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:16] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:54:16,661 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:16] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:54:18,39 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:54:18,44 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:18] "GET /employeecreate/dd HTTP/1.1" 200 -
+2023-08-05,10:54:18,81 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:18] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:54:21,997 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:54:22,9 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:22] "[32mPOST /employeecreate/dd HTTP/1.1[0m" 302 -
+2023-08-05,10:54:22,15 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:54:22,17 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:22] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:54:22,68 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:54:22] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:55:56,787 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:55:56,794 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:55:56] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:55:56,834 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:55:56] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:56:33,309 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:56:33,317 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:56:33] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:56:33,350 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:56:33] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:56:50,694 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:56:50,701 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:56:50] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:56:50,729 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:56:50] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:56:58,998 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:56:59,6 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:56:59] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:56:59,34 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:56:59] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:57:17,86 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:57:17,95 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:57:17] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:57:17,123 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:57:17] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:57:51,165 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:57:51,174 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:57:51] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:57:51,198 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:57:51] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:58:23,127 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:58:23,137 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:58:23] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:58:23,167 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:58:23] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:58:48,899 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:58:48,910 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:58:48] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:58:48,947 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:58:48] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:58:57,347 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:58:57,354 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:58:57] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:58:57,385 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:58:57] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -
+2023-08-05,10:59:05,86 root INFO botusername='dd'; path='employee_list/home/employee_list/createemployee/createemployee/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list/employee_list';  user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'; ip=127.0.0.1
+2023-08-05,10:59:05,96 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:59:05] "GET /employee_list/dd HTTP/1.1" 200 -
+2023-08-05,10:59:05,119 werkzeug INFO 127.0.0.1 - - [05/Aug/2023 10:59:05] "[36mGET /static/styles/main.css HTTP/1.1[0m" 304 -

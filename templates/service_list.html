@@ -20,9 +20,9 @@
           <thead>
             <tr>
               <!-- <th scope="col">ID</th>-->
-              <th scope="col">Послуга</th>
-              <th scope="col">Ціна</th>
-              <th scope="col">Дії</th>
+              <th scope="col" class="align-middle">Послуга</th>
+              <th scope="col" class="align-middle">Ціна</th>
+              <th scope="col" class="text-center">Дії</th>
             </tr>
           </thead>
           <tbody>
@@ -31,11 +31,11 @@
               <!-- <th scope="row">{{service[0]}} </th> -->
               <!-- <td>{{service.service_name}}</td> -->
               <!-- <td>{{service.service_price}}</td> -->
-              <td>{{service[1]}}</td>
-              <td>{{service[2]}}</td>
-              <td>
-                <a type="button" class="btn btn-light" href="/service/{{botusername}}/{{service[0]}}/upd"><i class="fas fa-edit"></i></a>
-                <a type="button" class="btn btn-light" href="/service/{{botusername}}/{{service[0]}}/del"><i class="far fa-trash-alt"></i></a>
+              <td class="align-middle">{{service[1]}}</td>
+              <td class="align-middle">{{service[2]}}</td>
+              <td class="text-center align-middle">
+                <a type="button" class="btn" href="/service/{{botusername}}/{{service[0]}}/upd"><i class="fas fa-edit fa-sm"></i></a>
+                <a type="button" class="btn" href="/service/{{botusername}}/{{service[0]}}/del"><i class="far fa-trash-alt fa-sm"></i></a>
               </td>
             </tr>
             {% endfor %}

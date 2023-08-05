@@ -20,18 +20,18 @@
         <thead>
           <tr>
             <th scope="col">ПІБ</th>
-            <th scope="col">Спеціалізація</th>
-            <th scope="col">Дії</th>
+            <th scope="col">Напрям</th>
+            <th scope="col" class="text-center">Дії</th>
           </tr>
         </thead>
         <tbody >
         {% for employee in employee_list  %}
           <tr>
-            <th scope="row" style="font-size: 12px;">{{employee[1]}} </th>
-            <td style="font-size: 12px;">{{employee[3]}}</td>
-            <td>
-              <a type="button" class="btn btn-light" href="/employee/{{botusername}}/{{employee[2]}}/upd"><i class="fas fa-edit"></i></a>
-            <a type="button" class="btn btn-light" href="/employee/{{botusername}}/{{employee[2]}}/del"><i class="far fa-trash-alt"></i></a>
+            <th scope="row" class="align-middle">{{employee[1]}} </th>
+            <td class="align-middle">{{employee[3]}}</td>
+            <td class="text-center align-middle" >
+              <a type="button" class="btn" href="/employee/{{botusername}}/{{employee[2]}}/upd"><i class="fas fa-edit fa-sm"></i></a>
+            <a type="button" class="btn" href="/employee/{{botusername}}/{{employee[2]}}/del"><i class="far fa-trash-alt fa-sm"></i></a>
             </td>
           </tr>
          {% endfor %}
