@@ -43,38 +43,41 @@
   </style>
 </head>
 <body>
-  <div class="container mt-4">
-    <h1>Профіль працівника</h1>
-    <form method="post" id="profileForm" >
-      <input type="hidden" name="employee_id" value="{{employee[0]}}">
-      <div class="form-group">
-        <label for="name">ПІБ</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{employee[1]}}" required disabled>
-      </div>
-      <div class="form-group">
-        <label for="phone">Телефон</label>
-        <input type="tel" class="form-control" id="phone" name="phone" value="{{employee[2]}}" required disabled>
-      </div>
-      <div class="form-group">
-        <label for="email"> Пошта</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{employee[6]}}" required disabled>
-      </div>
-      <div class="form-group">
-        <label for="profession">Спеціалізація</label>
-        <input type="text" class="form-control" id="profession" name="specialization" value="{{employee[3]}}" required disabled>
-      </div>
-      <div class="form-group">
-        <label for="about">Про себе</label>
-        <textarea class="form-control" id="about" name="about" value="{{employee[4]}}" rows="3" disabled></textarea>
-      </div>
-      <div class="form-group">
-        <label for="photo">Завантажити фото</label>
-        <input type="file" class="form-control-file" id="photo" name="photo"  disabled>
-        <img id="photoPreview" src="#" alt="Preview" class="mt-2 img-thumbnail d-none">
-      </div>
-      <div class="form-group">
-      <button type="button" class="btn btn-danger" id="detailsButton">Робочий графік</button>
-      </div>
+  <div class="container mt-4" style="top:0">
+  <h3>Профіль</h3>
+  <form method="post" id="profileForm">
+    <input type="hidden" name="employee_id" value="{{employee[0]}}">
+    <div class="form-group mb-2">
+      <label for="name">ПІБ</label>
+      <input type="text" class="form-control" id="name" name="name" value="{{employee[1]}}">
+    </div>
+    <div class="form-group mb-2">
+      <label for="phone">Телефон</label>
+      <input type="tel" class="form-control" id="phone" name="phone" value="{{employee[2]}}">
+    </div>
+    <div class="form-group mb-2">
+      <label for="email">Пошта</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{employee[6]}}">
+    </div>
+    <div class="form-group mb-2">
+      <label for="profession">Спеціалізація</label>
+      <input type="text" class="form-control" id="profession" name="specialization" value="{{employee[3]}}">
+    </div>
+    <div class="form-group mb-2">
+      <label for="about">Про себе</label>
+      <textarea class="form-control" id="about" name="about" rows="3">{{employee[4]}}</textarea>
+    </div>
+    <div class="form-group mb-2">
+      <label for="photo">Завантажити фото</label>
+      <input type="file" class="form-control-file" id="photo" name="photo">
+      <img id="photoPreview" src="#" alt="Preview" class="mt-2 img-thumbnail">
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <button type="submit" class="btn" id="saveButton" style="background-color:#009688; color: white;">Зберегти зміни</button>
+      <a type="button" class="btn" id="detailsButton" style="background-color:#009688; color: white;">Робочий графік</a>
+    <!-- Кнопки для редагування і збереження змін -->
+
+    </div>
       <!-- Блок для налаштувань робочого графіку -->
       <div id="workScheduleSettings">
       <!-- Нова секція налаштувань робочих годин -->
@@ -170,11 +173,7 @@
         </tr>
         <!-- Додайте інші дні тижня тут... -->
       </table>
-      </div>
-      <!-- Кнопки для редагування і збереження змін -->
-      <button type="button" class="btn btn-primary" id="editButton">Редагувати</button>
-      <button type="submit" class="btn btn-success d-none" id="saveButton">Зберегти зміни</button>
-    </form>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -193,11 +192,7 @@
     });
 
     // Enable editing of form fields
-    $("#editButton").click(function() {
-      $("input, textarea, select").prop("disabled", false);
-      $("#editButton").addClass("d-none");
-      $("#saveButton").removeClass("d-none");
-    });
+
 
     // Handle weekend days selection
     $("#weekendSun, #weekendMon").change(function() {
