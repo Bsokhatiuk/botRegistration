@@ -14,7 +14,7 @@ def db_start():
     cur.execute(
         "CREATE TABLE IF NOT EXISTS admins (user_id TEXT, org_name TEXT, phone TEXT, password TEXT, bot_username TEXT, bot_id TEXT PRIMARY KEY)")
     cur.execute(
-        "CREATE TABLE IF NOT EXISTS service (service_id INTEGER PRIMARY KEY AUTOINCREMENT, service_name TEXT NOT NULL UNIQUE, price REAL, bot_username TEXT)")
+        "CREATE TABLE IF NOT EXISTS service (service_id INTEGER PRIMARY KEY AUTOINCREMENT, service_name TEXT NOT NULL UNIQUE, price REAL, service_hour REAL, bot_username TEXT)")
     cur.execute(
         "CREATE TABLE IF NOT EXISTS employee (employee_id INTEGER, name TEXT NOT NULL, phone TEXT, specialization TEXT, info TEXT, photo BLOB, email TEXT, bot_username TEXT)")
     cur.execute(
@@ -51,10 +51,10 @@ def get_register_check(bot_username=''):
     return register_check
 
 
-def create_service(service_name, price, bot_username=''):
+def create_service(service_name, price, service_hour=1, bot_username=''):
     service = cur.execute("SELECT * FROM service WHERE service_name='{key}' and bot_username='{key2}'".format(key=service_name, key2=bot_username)).fetchone()
     if not service:
-        cur.execute("INSERT INTO service VALUES (?, ?, ?, ?)", (None, service_name, price, bot_username))
+        cur.execute("INSERT INTO service VALUES (?, ?, ?, ?, ?)", (None, service_name, price, service_hour, bot_username))
         db.commit()
 
 
@@ -71,9 +71,9 @@ def delete_service(service_id, bot_username=''):
         print(err)
 
 
-def update_service(service_id, service_name, price, bot_username=''):
+def update_service(service_id, service_name, price, service_hour=1, bot_username=''):
     cur.execute(
-        "UPDATE service SET service_name = ?, price= ?  WHERE service_id = ? and bot_username = ?", (service_name, price, service_id, bot_username))
+        "UPDATE service SET service_name = ?, price= ?, service_hour= ?  WHERE service_id = ? and bot_username = ?", (service_name, price, service_hour, service_id , bot_username))
     db.commit()
 
 
