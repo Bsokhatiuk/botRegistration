@@ -5,6 +5,7 @@ import json
 from utils.loggingFilter import ContextualFilter
 import secrets
 import logging
+import os
 logging.basicConfig(filename='app_web.log',
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
@@ -16,7 +17,8 @@ app = Flask(__name__)
 token = secrets.token_bytes(32)
 app.secret_key = token
 
-
+UPLOAD_FOLDER = '/static/img'  # Папка для зберігання завантажених фотографій
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # from aiogram import Bot, Dispatcher, types, executor
 # from config import TOKEN_API
@@ -308,8 +310,17 @@ def profile(botusername, id, phone):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; id_user='{id}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
-        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
-                            id, request.form['about'], request.form['photo'], request.form['email'], botusername)
+        photo = request.files['photo']  # Отримуємо завантажений файл з форми
+        if photo:
+            filename = photo.filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            print(filepath)
+            photo.save(filename)
+            dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
+                                           id, request.form['about'], filename, request.form['email'], botusername)
+        else:
+            dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
+                                id, request.form['about'], request.form['photo'], request.form['email'], botusername)
     employee = dao.get_employee_by_phone(phone, botusername)
     return render_template('profile.html', employee= employee)
 
