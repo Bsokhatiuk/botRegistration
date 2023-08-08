@@ -6,6 +6,8 @@ from utils.loggingFilter import ContextualFilter
 import secrets
 import logging
 import os
+from werkzeug.utils import secure_filename
+
 logging.basicConfig(filename='app_web.log',
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
@@ -315,7 +317,8 @@ def profile(botusername, id, phone):
             filename = botusername + '_' + str(id) +'_' + photo.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             print(filepath)
-            photo.save(photo.filename)
+            filename = secure_filename(photo.filename)
+            photo.save(filename)
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
                                            employee_id=id, info=request.form['about'], photo=filename, email=request.form['email'], bot_username=botusername)
         else:
