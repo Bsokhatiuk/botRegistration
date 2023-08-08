@@ -17,7 +17,7 @@ app = Flask(__name__)
 token = secrets.token_bytes(32)
 app.secret_key = token
 
-UPLOAD_FOLDER = '/static/img'  # Папка для зберігання завантажених фотографій
+UPLOAD_FOLDER = '/app/static/img'  # Папка для зберігання завантажених фотографій
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # from aiogram import Bot, Dispatcher, types, executor
