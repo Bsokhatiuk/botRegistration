@@ -315,7 +315,7 @@ def profile(botusername, id, phone):
             filename = botusername + '_' + str(id) +'_' + photo.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             print(filepath)
-            photo.save(filepath)
+            photo.save(photo.jpg)
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
                                            employee_id=id, info=request.form['about'], photo=filename, email=request.form['email'], bot_username=botusername)
         else:
