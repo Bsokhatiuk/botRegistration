@@ -56,4 +56,23 @@ function confirmDelete(url) {
 }
 </script>
 
+<script>
+	let tg = window.Telegram.WebApp;
+	tg.expand();
+	tg.MainButton.text = "Вихід";
+    tg.MainButton.color = "#009688";
+    tg.MainButton.hide()
+    tg.BackButton.show()
+
+    window.Telegram.WebApp.onEvent("mainButtonClicked", function(){
+      tg.close();
+   });
+
+
+    window.Telegram.WebApp.onEvent("backButtonClicked", function(){
+      window.history.back();
+   });
+
+
+</script>
 {% endblock %}
