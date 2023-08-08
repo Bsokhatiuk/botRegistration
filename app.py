@@ -312,12 +312,12 @@ def profile(botusername, id, phone):
     if request.method == "POST":
         photo = request.files['photo']  # Отримуємо завантажений файл з форми
         if photo:
-            filename = photo.filename
+            filename = botusername + '_' + str(id) +'_' + photo.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             print(filepath)
-            photo.save(filename)
+            photo.save(filepath)
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
-                                           id, request.form['about'], filename, request.form['email'], botusername)
+                                           employee_id=id, info=request.form['about'], photo=filename, email=request.form['email'], bot_username=botusername)
         else:
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
                                 id, request.form['about'], request.form['photo'], request.form['email'], botusername)
