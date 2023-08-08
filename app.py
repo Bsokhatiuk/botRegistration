@@ -10,7 +10,7 @@ logging.basicConfig(filename='app_web.log',
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%Y-%m-%d,%H:%M:%S',
-                    level=logging.DEBUG)
+                    level=logging.INFO)
 
 dao.db_start()
 app = Flask(__name__)
@@ -315,7 +315,7 @@ def profile(botusername, id, phone):
             filename = botusername + '_' + str(id) +'_' + photo.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             print(filepath)
-            photo.save(photo.jpg)
+            photo.save(photo.filename)
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
                                            employee_id=id, info=request.form['about'], photo=filename, email=request.form['email'], bot_username=botusername)
         else:
