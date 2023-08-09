@@ -36,7 +36,7 @@
       <form method="post">
         <div class="form-group">
           <label for="phone">Телефон</label>
-          <input type="text" class="form-control" id="phone" name="phone" value="+380" placeholder="Телефон">
+          <input type="text" class="form-control" id="phone" placeholder="Телефон" name="phone" pattern="\+380\d{9}" inputmode="tel" required>
         </div>
         <button type="submit" class="btn btn-primary">Увійти</button>
       </form>

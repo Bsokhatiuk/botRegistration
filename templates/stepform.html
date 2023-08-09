@@ -43,7 +43,7 @@ Form step register
 <!--                    <span class="input-group-text"> <i class="fa fa-phone" style="width:10%"></i> </span>-->
 <!--                </div>-->
 
-                <input type="text" placeholder="Мобільний телефон" oninput="this.className = ''" name="mobile" style="width:100%"  value ="+380">
+                <input type="text" placeholder="Мобільний телефон" oninput="this.className = ''" name="mobile" style="width:100%"  pattern="\+380\d{9}" inputmode="tel" required>
 
             </div>
             </article>
