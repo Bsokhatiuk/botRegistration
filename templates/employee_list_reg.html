@@ -30,9 +30,9 @@
             <th scope="row" class="align-middle">{{employee[1]}} </th>
             <td class="align-middle">{{employee[3]}}</td>
             <td class="text-center align-middle" >
-              <a type="button" class="btn" href="/employee/{{botusername}}/{{employee[2]}}/upd"><i class="fas fa-edit fa-sm"></i></a>
+              <a type="button" class="btn" href="/employee/{{botusername}}/{{employee[2]}}/upd_reg"><i class="fas fa-edit fa-sm"></i></a>
 <!--              <a type="button" class="btn" href="/profile/{{botusername}}/{{employee[2]}}/"><i class="fas fa-edit fa-sm"></i></a>-->
-              <a type="button" class="btn" href="/employee/{{botusername}}/{{employee[2]}}/del">
+              <a type="button" class="btn" href="/employee/{{botusername}}/{{employee[2]}}/del_reg">
               <i class="far fa-trash-alt fa-sm"></i>
             </a>
             </td>
@@ -41,7 +41,8 @@
         </tbody>
       </table>
       </div>
-      <a class="btn" id="insertRow" href="/employeecreate/{{botusername}}" style="background-color:#009688; color: white;">Додати нового працівника</a>
+      <a class="btn" id="insertRow" href="/employeecreate/{{botusername}}/reg" style="background-color:#009688; color: white;">Додати нового працівника</a>
+      <a class="btn" id="insertRow2" href="/exit/{{botusername}}" style="background-color:#009688; color: white;">Далі</a>
     </div>
   </div>
 </div>

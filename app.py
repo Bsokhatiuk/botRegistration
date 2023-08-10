@@ -84,7 +84,7 @@ def stepform(botusername, bot_id, id):
         password = request.form['password']
         dao.create_admin(id, org_name, mobile, password, botusername, bot_id)
         session['check'] = 0
-        return redirect('/createservice/' + botusername)
+        return redirect('/service_list_reg/' + botusername)
     else:
         print(botusername, bot_id, id)
         return render_template('stepform.html')
@@ -111,6 +111,29 @@ def createservice(botusername):
     else:
         return render_template('createservice.html')
 
+@app.route("/createservice/<botusername>/reg", methods=['POST', 'GET'])
+def createservice_reg(botusername):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+
+    if request.method == "POST":
+        dao.create_service(request.form['service_name'], request.form['service_price'], service_hour=1, bot_username=botusername)
+        # service_list = dao.get_service()
+        session['check']=0
+        url = '/service_list_reg/' + botusername
+        return redirect(url)
+    else:
+        return render_template('createservice.html')
+
+
+
 @app.route("/service_list/<botusername>", methods=['GET'])
 def service_list(botusername):
     session['botusername'] = botusername
@@ -132,6 +155,28 @@ def service_list(botusername):
             new_service_list.append((service[0], service[1], service[2], service[3]))
     return render_template('service_list.html', service_list=new_service_list, botusername=botusername)
 
+@app.route("/service_list_reg/<botusername>", methods=['GET'])
+def service_list_reg(botusername):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    service_list = dao.get_service(botusername)
+    new_service_list = []
+    for service in service_list:
+        try:
+            new_service_list.append((service[0], service[1],  int(service[2]),  service[3]))
+        except Exception as err:
+            print(err)
+            new_service_list.append((service[0], service[1], service[2], service[3]))
+    return render_template('service_list_reg.html', service_list=new_service_list, botusername=botusername)
+
+
 @app.route("/service/<botusername>/<int:id>/del", methods=['GET', 'POST'])
 def service_delete(botusername, id):
     session['botusername'] = botusername
@@ -145,6 +190,21 @@ def service_delete(botusername, id):
     logging.info(f"botusername='{botusername}'; id_user='{id}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     dao.delete_service(id, botusername)
     url = '/service_list/' + botusername
+    return redirect(url)
+
+@app.route("/service/<botusername>/<int:id>/del_reg", methods=['GET', 'POST'])
+def service_delete_reg(botusername, id):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; id_user='{id}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    dao.delete_service(id, botusername)
+    url = '/service_list_reg/' + botusername
     return redirect(url)
 
 @app.route("/service/<botusername>/<int:id>/upd", methods=['GET', 'POST'])
@@ -167,6 +227,25 @@ def service_update(botusername, id):
         return render_template('/serviceupdate.html', service= service)
 
 
+@app.route("/service/<botusername>/<int:id>/upd_reg", methods=['GET', 'POST'])
+def service_update_reg(botusername, id):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; id_user='{id}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    if request.method == "POST":
+        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], service_hour=1, bot_username=botusername)
+        url = '/service_list_reg/' + botusername
+        return redirect(url)
+    else:
+        service = dao.get_service_one(id, botusername)
+        return render_template('/serviceupdate.html', service= service)
+
 @app.route("/serviceupdate/<botusername>", methods=['GET', 'POST'])
 def service_update_bd(botusername):
     session['botusername'] = botusername
@@ -183,6 +262,8 @@ def service_update_bd(botusername):
         url = '/service_list/' + botusername
         return redirect(url)
     return render_template('serviceupdate.html')
+
+
 
 
 @app.route("/employeecreate/<botusername>", methods=['POST', 'GET'])
@@ -203,6 +284,23 @@ def createemployee(botusername):
     else:
         return render_template('employeecreate.html')
 
+@app.route("/employeecreate/<botusername>/reg", methods=['POST', 'GET'])
+def createemployee_reg(botusername):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    if request.method == "POST":
+        dao.create_employee(request.form['name'], request.form['phone'], request.form['specialization'], bot_username=botusername)
+        url = '/employee_list_reg/' + botusername
+        return redirect(url)
+    else:
+        return render_template('employeecreate.html')
 
 @app.route("/employee_list/<botusername>", methods=['POST', 'GET'])
 def employee_list(botusername):
@@ -217,6 +315,20 @@ def employee_list(botusername):
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     employee_list = dao.get_employee_all(botusername)
     return render_template('employee_list.html', employee_list=employee_list, botusername=botusername)
+
+@app.route("/employee_list/<botusername>/reg", methods=['POST', 'GET'])
+def employee_list_reg(botusername):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    employee_list = dao.get_employee_all(botusername)
+    return render_template('employee_list_reg.html', employee_list=employee_list, botusername=botusername)
 
 @app.route("/employee/<botusername>/<phone>/del", methods=['GET', 'POST'])
 def employee_delete(botusername, phone):
@@ -253,6 +365,42 @@ def employee_update(botusername, phone):
         employee = dao.get_employee_by_phone(phone, botusername)
         return render_template('/employee_update.html', employee= employee)
 
+
+
+@app.route("/employee/<botusername>/<phone>/del_reg", methods=['GET', 'POST'])
+def employee_delete_reg(botusername, phone):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    dao.delete_employee(phone, botusername)
+    url = '/employee_list_reg/' + botusername
+    return redirect(url)
+
+
+@app.route("/employee/<botusername>/<phone>/upd_reg", methods=['GET', 'POST'])
+def employee_update_reg(botusername, phone):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    if request.method == "POST":
+        dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'], request.form['employee_id'],  request.form['info'], request.form['photo'], bot_username=botusername)
+        url = '/employee_list_reg/' + botusername
+        return redirect(url)
+    else:
+        employee = dao.get_employee_by_phone(phone, botusername)
+        return render_template('/employee_update.html', employee= employee)
 
 @app.route("/login/<botusername>/<int:id>/<first_name>/<last_name>", methods=['POST', 'GET'])
 def login(botusername, id, first_name, last_name):
