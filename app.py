@@ -316,7 +316,7 @@ def employee_list(botusername):
     employee_list = dao.get_employee_all(botusername)
     return render_template('employee_list.html', employee_list=employee_list, botusername=botusername)
 
-@app.route("/employee_list/<botusername>/reg", methods=['POST', 'GET'])
+@app.route("/employee_list_reg/<botusername>", methods=['POST', 'GET'])
 def employee_list_reg(botusername):
     session['botusername'] = botusername
     if 'history' in session:
