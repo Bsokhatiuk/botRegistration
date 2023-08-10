@@ -60,7 +60,7 @@ def home(botusername, bot_id, id):
     return render_template('index.html', botusername=botusername, bot_id=bot_id, id=id)
 
 @app.route("/exit/<botusername>", methods=['POST', 'GET'])
-def exit():
+def exit(botusername):
     return render_template('exit.html')
 
 
