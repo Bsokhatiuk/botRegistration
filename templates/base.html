@@ -67,7 +67,7 @@
 <!--      <a  href="/service_list" style="margin: 10px; text-decoration: none;"><i class="bi bi-card-list fa-2x"></i></a></div>-->
 <!--  <div class="p-2 flex-fill bd-highlight">-->
 <!--      <a  href="/employee_list" style="margin: 10px; text-decoration: none;"><i class="bi bi-people-fill fa-2x"></i></a></div>-->
-<!--</div>-->
+<!--</div> tg.MainButton.show()-->
 <!--</section>-->
 
 <script>
@@ -75,7 +75,6 @@
 	tg.expand();
 	tg.MainButton.text = "Вихід";
     tg.MainButton.color = "#009688";
-    tg.MainButton.show()
     tg.BackButton.show()
 
     window.Telegram.WebApp.onEvent("mainButtonClicked", function(){
