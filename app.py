@@ -8,11 +8,11 @@ import logging
 import os
 from werkzeug.utils import secure_filename
 
-logging.basicConfig(filename='app_web.log',
-                    filemode='a',
-                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-                    datefmt='%Y-%m-%d,%H:%M:%S',
-                    level=logging.INFO)
+# logging.basicConfig(filename='app_web.log',
+#                     filemode='a',
+#                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+#                     datefmt='%Y-%m-%d,%H:%M:%S',
+#                     level=logging.INFO)
 
 dao.db_start()
 app = Flask(__name__)
@@ -219,6 +219,7 @@ def service_update(botusername, id):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; id_user='{id}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
+        print(request.form['service_duration'])
         dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], request.form['service_duration'], bot_username=botusername)
         url = '/service_list/' + botusername
         return redirect(url)
