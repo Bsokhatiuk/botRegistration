@@ -24,9 +24,10 @@
 
         <div class="form-group">
                     <label for="service_duration">Тривалість послуги</label>
-                    <select class="form-control" id="service_duration" name="service_duration">
-                        <option value="0.5">0.5 год</option>
-                        <option value="1" selected>1 год</option>
+                    <select  class="form-control" id="service_duration" name="service_duration">
+                        <option value="{{service[3]}}" selected disabled hidden> {{service[3]}}</option>
+                        <option value="0.5">30 хв</option>
+                        <option value="1" >1 год</option>
                         <option value="1.5">1.5 год</option>
                         <option value="2">2 год</option>
                         <option value="3">3 год</option>
