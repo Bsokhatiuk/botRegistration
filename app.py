@@ -103,7 +103,7 @@ def createservice(botusername):
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
 
     if request.method == "POST":
-        dao.create_service(request.form['service_name'], request.form['service_price'], service_hour=1, bot_username=botusername)
+        dao.create_service(request.form['service_name'], request.form['service_price'], request.form['service_duration'], bot_username=botusername)
         # service_list = dao.get_service()
         session['check']=0
         url = '/service_list/' + botusername
@@ -124,7 +124,7 @@ def createservice_reg(botusername):
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
 
     if request.method == "POST":
-        dao.create_service(request.form['service_name'], request.form['service_price'], service_hour=1, bot_username=botusername)
+        dao.create_service(request.form['service_name'], request.form['service_price'], request.form['service_duration'], bot_username=botusername)
         # service_list = dao.get_service()
         session['check']=0
         url = '/service_list_reg/' + botusername
@@ -219,7 +219,7 @@ def service_update(botusername, id):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; id_user='{id}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
-        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], service_hour=1, bot_username=botusername)
+        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], request.form['service_duration'], bot_username=botusername)
         url = '/service_list/' + botusername
         return redirect(url)
     else:
@@ -239,7 +239,7 @@ def service_update_reg(botusername, id):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; id_user='{id}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
-        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], service_hour=1, bot_username=botusername)
+        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], request.form['service_duration'], bot_username=botusername)
         url = '/service_list_reg/' + botusername
         return redirect(url)
     else:
@@ -258,7 +258,7 @@ def service_update_bd(botusername):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
-        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], botusername)
+        dao.update_service(request.form['service_id'], request.form['service_name'], request.form['service_price'], request.form['service_duration'], botusername)
         url = '/service_list/' + botusername
         return redirect(url)
     return render_template('serviceupdate.html')
