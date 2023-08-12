@@ -499,7 +499,7 @@ def timesettings(botusername, phone):
 
 
 @app.route("/calendar_month/<botusername>/<phone>", methods=['POST', 'GET'])
-def timesettings(botusername, phone):
+def calendar_month(botusername, phone):
     session['botusername'] = botusername
     if 'history' in session:
         history = session['history']
