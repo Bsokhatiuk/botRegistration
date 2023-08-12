@@ -477,7 +477,13 @@ def profile(botusername, id, phone):
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
                                 id, request.form['about'], request.form['photo'], request.form['email'], botusername)
     employee = dao.get_employee_by_phone(phone, botusername)
-    return render_template('profile.html', employee= employee)
+    return render_template('profile.html', employee= employee, botusername= botusername)
+
+
+@app.route("/timesettings/<botusername>/<phone>", methods=['POST', 'GET'])
+def timesettings(botusername, phone):
+    return render_template('time_settings.html', id=id)
+
 
 
 @app.route("/calendar/<botusername>/<int:id>", methods=['POST', 'GET'])

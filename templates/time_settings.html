@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}
+алаштування Робочого Графіка
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4" style="top:0">
+  <h3>Налаштування Робочого Графіка</h3>
+<form id="scheduleForm">
+    <div class="form-group">
+      <label for="firstShift">Вкажіть, будь ласка, години роботи вашої першої зміни</label>
+      <div class="row">
+        <div class="col">
+          <input type="time" class="form-control" id="firstShiftStart" name="firstShiftStart" step="3600" value="00:00">
+        </div>
+        <div class="col-auto">до</div>
+        <div class="col">
+          <input type="time" class="form-control" id="firstShiftEnd" name="firstShiftEnd" step="3600" value="00:00">
+        </div>
+      </div>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="secondShiftCheckbox" name="secondShiftCheckbox">
+      <label class="form-check-label" for="secondShiftCheckbox">Друга зміна</label>
+    </div>
+    <div id="secondShiftInputs" style="display: none;">
+      <div class="form-group">
+        <label for="secondShift">Години роботи для другої зміни</label>
+        <div class="row">
+          <div class="col">
+            <input type="time" class="form-control" id="secondShiftStart" name="secondShiftStart" step="3600" value="00:00">
+          </div>
+          <div class="col-auto">до</div>
+          <div class="col">
+            <input type="time" class="form-control" id="secondShiftEnd" name="secondShiftEnd" step="3600" value="00:00">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" id="nextButton">Далі</button>
+  </form>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const secondShiftCheckbox = document.getElementById("secondShiftCheckbox");
+  const secondShiftInputs = document.getElementById("secondShiftInputs");
+  const nextButton = document.getElementById("nextButton");
+
+  secondShiftCheckbox.addEventListener("change", function() {
+    if (secondShiftCheckbox.checked) {
+      secondShiftInputs.style.display = "block";
+    } else {
+      secondShiftInputs.style.display = "none";
+    }
+  });
+    const firstShiftStartInput = document.getElementById("firstShiftStart");
+  const firstShiftEndInput = document.getElementById("firstShiftEnd");
+  const secondShiftStartInput = document.getElementById("secondShiftStart");
+  const secondShiftEndInput = document.getElementById("secondShiftEnd");
+
+  [firstShiftStartInput, firstShiftEndInput, secondShiftStartInput, secondShiftEndInput].forEach(input => {
+    input.addEventListener("input", function() {
+      validateTimeRange(input);
+    });
+  });
+
+  function validateTimeRange(input) {
+    const startTimeInput = input.id.includes("Start") ? input : (input.id.includes("End") ? input.parentElement.previousElementSibling.querySelector("input") : null);
+    const endTimeInput = input.id.includes("End") ? input : (input.id.includes("Start") ? input.parentElement.nextElementSibling.querySelector("input") : null);
+
+    if (startTimeInput && endTimeInput) {
+      const startTime = new Date(`1970-01-01T${startTimeInput.value}`);
+      const endTime = new Date(`1970-01-01T${endTimeInput.value}`);
+
+      if (startTime >= endTime) {
+        alert("Неправильний часовий діапазон");
+        startTimeInput.value = "00:00";
+        endTimeInput.value = "00:00";
+      }
+    }
+  }
+});
+</script>
+{% endblock %}

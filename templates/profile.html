@@ -74,108 +74,9 @@ User Profile Settings
     </div>
     <div class="d-flex justify-content-between align-items-center">
       <button type="submit" class="btn" id="saveButton" style="background-color:#009688; color: white;">Зберегти зміни</button>
-      <a type="button" class="btn" id="detailsButton" style="background-color:#009688; color: white;">Робочий графік</a>
-    <!-- Кнопки для редагування і збереження змін -->
-
+      <a type="button" href="/timesettings/{{botusername}}/{{employee[2]}}" class="btn" id="detailsButton" style="background-color:#009688; color: white;">Робочий графік</a>
     </div>
     </form>
-      <!-- Блок для налаштувань робочого графіку -->
-      <div id="workScheduleSettings">
-      <!-- Нова секція налаштувань робочих годин -->
-<!--      <h3>Робочий графік</h3>-->
-      <table>
-        <tr>
-          <th>День</th>
-          <th>Робочі години</th>
-        </tr>
-        <tr>
-          <td>Понеділок</td>
-          <td>
-            <input type="time" class="form-control" id="workHoursStartMon" disabled>
-            <span> по </span>
-            <input type="time" class="form-control" id="workHoursEndMon" disabled>
-            <div>
-            <input type="checkbox" class="form-check-input" id="weekendMon" value="0">
-            <label class="form-check-label" for="weekendMon">Вихідний</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>Вівторок</td>
-          <td>
-            <input type="time" class="form-control" id="workHoursStartTr" disabled>
-            <span> по </span>
-            <input type="time" class="form-control" id="workHoursEndtr" disabled>
-            <div>
-            <input type="checkbox" class="form-check-input" id="weekendtr" value="0">
-            <label class="form-check-label" for="weekendtr">Вихідний</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-        <td>Середа</td>
-          <td>
-            <input type="time" class="form-control" id="workHoursStartWen" disabled>
-            <span> по </span>
-            <input type="time" class="form-control" id="workHoursEndWen" disabled>
-            <div>
-            <input type="checkbox" class="form-check-input" id="weekendWen" value="0">
-            <label class="form-check-label" for="weekendWen">Вихідний</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-        <td>Четвер</td>
-          <td>
-            <input type="time" class="form-control" id="workHoursStarttu" disabled>
-            <span> по </span>
-            <input type="time" class="form-control" id="workHoursEndtu" disabled>
-            <div>
-            <input type="checkbox" class="form-check-input" id="weekendtu" value="0">
-            <label class="form-check-label" for="weekendtu">Вихідний</label>
-              </div>
-          </td>
-        </tr>
-        <tr>
-        <td>Пятниця</td>
-          <td>
-            <input type="time" class="form-control" id="workHoursStartfr" disabled>
-            <span> по </span>
-            <input type="time" class="form-control" id="workHoursEndfr" disabled>
-            <div>
-            <input type="checkbox" class="form-check-input" id="weekendfr" value="0">
-            <label class="form-check-label" for="weekendfr">Вихідний</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-        <td>Субота</td>
-          <td>
-            <input type="time" class="form-control" id="workHoursStartst" disabled>
-            <span> по </span>
-            <input type="time" class="form-control" id="workHoursEndst" disabled>
-            <div>
-            <input type="checkbox" class="form-check-input" id="weekendst" value="0">
-            <label class="form-check-label" for="weekendst">Вихідний</label>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>Неділя</td>
-          <td>
-            <input type="time" class="form-control" id="workHoursStartSun" disabled>
-            <span> по </span>
-            <input type="time" class="form-control" id="workHoursEndSun" disabled>
-            <div>
-            <input type="checkbox" class="form-check-input" id="weekendSun" value="0">
-            <label class="form-check-label" for="weekendSun">Вихідний</label>
-            </div>
-          </td>
-        </tr>
-        <!-- Додайте інші дні тижня тут... -->
-      </table>
-
-  </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -207,10 +108,5 @@ User Profile Settings
     });
 
     // Handle form submission
-
-
-   $("#detailsButton").click(function() {
-      $("#workScheduleSettings").toggle();
-    });
     </script>
     {% endblock %}

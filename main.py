@@ -32,16 +32,11 @@ dp = Dispatcher(bot)
 # @dp.message_handler()
 # async def print(message:types.Message):
 #     await message.answer(text=message.from_user.id)
-def get_keybord(id, bot_username, id_bot, first_name, last_name):
-    if len(first_name)<1:
-        first_name="NULL"
-    if len(last_name)<1:
-        last_name="NULL"
+def get_keybord(id, bot_username, id_bot):
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
     b1 = KeyboardButton("Поділитись 📱 ", request_contact=True)
     b2 = KeyboardButton("start",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/" + bot_username + '/' + str(id)))
     b3 = KeyboardButton("menu", web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/home/" + bot_username + '/' +str(id_bot) +"/"+ str(id)))
-    b4 = KeyboardButton("login",web_app=WebAppInfo(url="https://agile-tor-82473-26eff49ec440.herokuapp.com/login/" + bot_username + '/' + str(id) + '/' + first_name + '/' +last_name))
 
     kb.add(b1).insert(b2).add(b3)
     return kb
@@ -91,7 +86,7 @@ async def help_command(message:types.Message):
 async def start_command(message:types.Message):
     text = """ save user data """
     name = await bot.get_me()
-    kb =  get_keybord(message.from_user.id, name['username'], name['id'], message.from_user.first_name, message.from_user.last_name)
+    kb =  get_keybord(message.from_user.id, name['username'], name['id'])
     await dao.create_user(message.from_user.id, message.from_user.first_name, message.from_user.last_name)
     await bot.send_message(chat_id=message.from_user.id, text=text, parse_mode='HTML',reply_markup=kb)
 
