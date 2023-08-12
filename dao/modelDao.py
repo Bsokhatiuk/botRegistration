@@ -19,6 +19,10 @@ def db_start():
         "CREATE TABLE IF NOT EXISTS employee (employee_id INTEGER, name TEXT NOT NULL, phone TEXT, specialization TEXT, info TEXT, photo BLOB, email TEXT, bot_username TEXT)")
     cur.execute(
         "CREATE TABLE IF NOT EXISTS register_check (check_regform INTEGER, check_service INTEGER, check_employee INTEGER, bot_username TEXT)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS time_settings (phone TEXT, is_two_graph TEXT, start_time TEXT, end_time TEXT, start_time_two TEXT, end_time_two TEXT, bot_username TEXT)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS wekly_settings (phone TEXT, template_one BLOB, template_two BLOB, bot_username TEXT)")
     db.commit()
 
 
@@ -134,4 +138,38 @@ def update_employee(employee_name, phone, specialization, employee_id=-1, info="
 def get_employee_by_phone(phone, bot_username=''):
     employee = cur.execute("SELECT * FROM employee WHERE phone='{key}' and bot_username='{key2}'".format(key=phone, key2=bot_username)).fetchone()
     return employee
+
+
+def create_time_settings(phone, is_two_graph='off', start_time='00:00', end_time='00:00', start_time_two='00:00', end_time_two='00:00', bot_username=''):
+    user = cur.execute("SELECT * FROM time_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone, key2=bot_username)).fetchone()
+    if not user:
+        cur.execute("INSERT INTO  time_settings VALUES (?, ?, ?, ?, ?, ?, ?)", (phone, is_two_graph, start_time, end_time, start_time_two, end_time_two, bot_username))
+        db.commit()
+
+def update_time_settings(phone, is_two_graph='off', start_time='00:00', end_time='00:00', start_time_two='00:00', end_time_two='00:00', bot_username=''):
+    cur.execute("UPDATE time_settings SET is_two_graph='{}', start_time='{}', end_time='{}', start_time_two='{}', end_time_two='{} WHERE phone='{}' and bot_username={}".format(is_two_graph,start_time, end_time, start_time_two, end_time_two,  phone, bot_username))
+    db.commit()
+def get_time_settings(phone, bot_username=''):
+    user = cur.execute("SELECT * FROM time_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
+    return user
+
+
+def create_wekly_settings(phone, template_one='', template_two='', bot_username=''):
+    user = cur.execute("SELECT * FROM time_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone, key2=bot_username)).fetchone()
+    if not user:
+        cur.execute("INSERT INTO  wekly_settings VALUES (?, ?, ?, ?, ?, ?, ?)", (phone, template_one, template_two, bot_username))
+        db.commit()
+
+def update_wekly_settings_one(phone, template_one='', bot_username=''):
+    cur.execute("UPDATE wekly_settings SET template_one='{}' WHERE phone='{}' and bot_username={}".format(template_one, phone, bot_username))
+    db.commit()
+
+def update_wekly_settings_two(phone, template_two='', bot_username=''):
+    cur.execute("UPDATE wekly_settings SET template_twp='{}' WHERE phone='{}' and bot_username={}".format(template_two, phone, bot_username))
+    db.commit()
+def get_wekly_settings(phone, bot_username=''):
+    user = cur.execute("SELECT * FROM wekly_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
+    return user
+
+
 

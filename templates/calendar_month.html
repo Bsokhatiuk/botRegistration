@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Адаптивний календар</title>
+{% extends 'base.html' %}
+
+{% block title %}
+Адаптивний календар
+{% endblock %}
+
+{% block body %}
+
     <!-- Підключення Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -14,25 +16,26 @@
     <!-- Підключення локалізації для української мови -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.uk.min.js"></script>
 
-</head>
-<body>
 
-<div class="container mt-4">
-    <h1>Календар</h1>
 
-    <div class="row">
-        <div class="col-md-12">
+<div class="container mt-4 text-center"> <!-- Додано клас text-center для центрування -->
+    <h3>Календар</h3>
+    <form method="post">
+    <div class="row justify-content-center"> <!-- Додано клас justify-content-center для центрування -->
+        <div class="col-md-8">
             <div id="calendar"></div>
         </div>
     </div>
-      <div class="row">
+
+    <div class="row">
         <div class="col-md-6">
-                <input type="hidden" class="form-control" id="selected-dates">
+            <input type="hidden" class="form-control" id="selected-dates" name="selected-dates">
         </div>
         <div class="col-md-6">
-            <button type="button" class="btn btn-primary" id="select-btn">Обрати</button>
+            <button class="btn" type="submit" style="background-color:#009688; color: white;"> Зберегти</button>
         </div>
     </div>
+    </form>
 </div>
 
 <!-- Підключення Bootstrap та jQuery -->
@@ -40,8 +43,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Підключення Bootstrap Datepicker -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.uk.min.js"></script> <!-- Додано локалізацію для української мови -->
 
 <script>
     $(document).ready(function() {
@@ -49,10 +52,10 @@
         $('#calendar').datepicker({
             multidate: true,
             format: 'yyyy-mm-dd',
-            todayHighlight: true
+            todayHighlight: true,
+            firstDay: 1,
+            language: 'uk' // Встановлення української мови
         });
-
-
 
         // Оновлення значення вибраних дат при зміні
         $('#calendar').on('changeDate', function() {
@@ -62,5 +65,4 @@
     });
 </script>
 
-</body>
-</html>
+{% endblock %}

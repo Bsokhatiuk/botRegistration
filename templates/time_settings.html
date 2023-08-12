@@ -6,8 +6,8 @@
 
 {% block body %}
 <div class="container mt-4" style="top:0">
-  <h3>Налаштування Робочого Графіка</h3>
-<form id="scheduleForm">
+  <h3>Робочий графік</h3>
+<form method="post" id="scheduleForm">
     <div class="form-group">
       <label for="firstShift">Вкажіть, будь ласка, години роботи вашої першої зміни</label>
       <div class="row">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" id="nextButton">Далі</button>
+    <button class="btn" type="submit" style="background-color:#009688; color: white;">Далі</button>
   </form>
 </div>
 
