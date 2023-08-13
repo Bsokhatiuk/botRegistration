@@ -540,9 +540,56 @@ def calendar_month_two(botusername, phone):
     if request.method == "POST":
         template_month = ut.generate_weekly_schedule_template(request.form['selected-dates'])
         dao.create_wekly_settings(phone, template_one=template_month,  bot_username=botusername)
-        return render_template('exit.html', botusername=botusername)
+        return render_template('schedule.html', botusername=botusername)
     else:
         return render_template('calendar_month.html', botusername=botusername, text='Заповність всій календар на 4 тижні по другій зміні')
+
+
+
+
+booked_slots = {
+        (9, 1): "John Doe",
+        (10, 2): "Jane Smith"
+        # Add more booked slots here
+    }
+@app.route('/schedule', methods=['POST', 'GET'])
+def schedule():
+
+    if request.method == 'POST':
+
+        selected_slot = request.form.get('selectedSlot')
+        patient_name = request.form.get('patientName')
+        patient_day = request.form.get('appointmentDay')
+        patient_hour = request.form.get('appointmentTime')
+        patient_service = request.form.get('service')
+        patient_hour = int(patient_hour)
+        patient_day = int(patient_day)
+        booked_slots[(patient_day,patient_hour)] = patient_name
+        # Отримання дати та часу з обраного слоту
+        print(patient_name)
+
+
+        if selected_slot and patient_name:
+            print(f"Slot {selected_slot} booked by {patient_name}")
+
+    print(booked_slots)
+    return render_template('schedule.html', booked_slots=booked_slots)
+
+@app.route('/schedule/del', methods=['POST'])
+def schedule_action():
+    if request.method == 'POST':
+        patient_day = request.form.get('appointmentDay')
+        patient_hour = request.form.get('appointmentTime')
+        print("patient_day", patient_day)
+        print("patient_hour", patient_hour)
+        patient_hour = int(patient_hour)
+        patient_day = int(patient_day)
+        selected_slot = (patient_day, patient_hour)
+        if selected_slot in booked_slots:
+            del booked_slots[selected_slot]
+            print(f"Slot {selected_slot} deleted")
+        # Додайте реалізацію для інших дій
+    return redirect('/schedule')
 
 
 @app.route("/calendar/<botusername>/<int:id>", methods=['POST', 'GET'])

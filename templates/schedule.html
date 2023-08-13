@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Schedule</title>
+    <!-- Підключення Bootstrap та jQuery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-4">
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+        </thead>
+<tbody>
+    {% for hour in range(9, 18) %}
+        <tr>
+            <th>{{ hour }}:00</th>
+            {% for day in range(1, 6) %}
+                <td data-toggle="modal" data-target="#bookingModal" class="clickable" data-slot="{{ hour }}_{{ day }}">
+                    {% if (hour, day) in booked_slots %}
+                        <div class="booked-slot text-danger" data-patient="{{ booked_slots[(hour, day)] }}">Зайнято</div>
+                    {% else %}
+                        <!-- Display available slot -->
+                    {% endif %}
+                </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Booking Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm" method="POST">
+                    <input type="hidden" id="selectedSlot" name="selectedSlot">
+                    <div class="form-group">
+                        <label for="patientName">Patient Name</label>
+                        <input type="text" class="form-control" id="patientName" name="patientName">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="appointmentDay" name="appointmentDay">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="appointmentTime" name="appointmentTime" >
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service</label>
+                        <select class="form-control" id="service" name="service">
+                            <option value="Service 1">Service 1</option>
+                            <option value="Service 2">Service 2</option>
+                            <option value="Service 3">Service 3</option>
+                            <!-- Додайте інші послуги за потребою -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" id="bookButton">Book</button>
+                        <button type="button" class="btn btn-danger" id="cancelButton">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function () {
+    var selectedSlot = null;
+
+    $(".clickable").click(function () {
+        selectedSlot = $(this).attr("data-slot");
+        var cell = $(this);
+        var hasData = cell.find(".booked-slot").length > 0;
+        if ($(this).hasClass("unavailable")) {
+            return; // Блокуємо можливість бронювання для недоступних комірок
+        }
+        if (hasData) {
+            var bookedPatient = cell.find(".booked-slot").data("patient");
+            $("#patientName").val(bookedPatient);
+        } else {
+            $("#patientName").val("");
+            $("#bookButton").prop("disabled", false);
+        }
+
+        var dayTime = selectedSlot.split("_");
+        var day = dayTime[0];
+        var time = dayTime[1];
+
+        $("#appointmentDay").val(day);
+        $("#appointmentTime").val(time);
+        $("#selectedSlot").val(selectedSlot);
+        $("#bookingModal").modal();
+    });
+
+    $("#bookingForm").submit(function (event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "/schedule",
+            data: formData,
+            success: function (response) {
+                console.log(response);
+                $("#bookingModal").modal("hide");
+                location.reload();
+            },
+            error: function () {
+                // Handle error
+            }
+        });
+    });
+
+    $("#cancelButton").click(function () {
+        var appointmentvalue = $("#appointmentDay").val();
+        var appointmenttimevalue = $("#appointmentTime").val();
+
+        var formData = {
+        appointmentDay: appointmentvalue,
+        appointmentTime: appointmenttimevalue
+    };
+
+        $.ajax({
+            type: "POST",
+            url: "/schedule/del",
+            data: formData,
+            success: function (response) {
+                console.log(response);
+                $("#bookingModal").modal("hide");
+                location.reload();
+            },
+            error: function () {
+                // Обробка помилок
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
