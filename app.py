@@ -492,10 +492,10 @@ def timesettings(botusername, phone):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
-        if request.form['secondShiftCheckbox']=='on':
+        if 'secondShiftCheckbox' in request.form.keys():
             dao.create_time_settings(phone, is_two_graph=request.form['secondShiftCheckbox'], start_time=request.form['firstShiftStart'], end_time=request.form['firstShiftEnd'], start_time_two=request.form['secondShiftStart'], end_time_two=request.form['secondShiftEnd'], bot_username=botusername)
         else:
-            dao.create_time_settings(phone, is_two_graph=request.form['secondShiftCheckbox'],
+            dao.create_time_settings(phone, is_two_graph='off',
                                      start_time=request.form['firstShiftStart'], end_time=request.form['firstShiftEnd'],
                                     bot_username=botusername)
         return redirect('/calendar_month/'+ botusername + "/" + phone)
@@ -517,10 +517,32 @@ def calendar_month(botusername, phone):
     if request.method == "POST":
         template_month = ut.generate_weekly_schedule_template(request.form['selected-dates'])
         dao.create_wekly_settings(phone, template_one=template_month,  bot_username=botusername)
+        time_setting = dao.get_time_settings(phone, botusername)
+        if time_setting[1]=='off':
+            return render_template('exit.html', botusername=botusername)
+        else:
+            return redirect('/calendar_month/'+ botusername + "/" + phone + "/2")
+    else:
+        return render_template('calendar_month.html', botusername=botusername, text='Заповність всій календар на 4 тижні по першій зміні')
+
+
+@app.route("/calendar_month/<botusername>/<phone>/2", methods=['POST', 'GET'])
+def calendar_month_two(botusername, phone):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    if request.method == "POST":
+        template_month = ut.generate_weekly_schedule_template(request.form['selected-dates'])
+        dao.create_wekly_settings(phone, template_one=template_month,  bot_username=botusername)
         return render_template('exit.html', botusername=botusername)
     else:
-        return render_template('calendar_month.html', botusername=botusername)
-
+        return render_template('calendar_month.html', botusername=botusername, text='Заповність всій календар на 4 тижні по другій зміні')
 
 
 @app.route("/calendar/<botusername>/<int:id>", methods=['POST', 'GET'])

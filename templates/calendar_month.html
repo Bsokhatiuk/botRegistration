@@ -18,22 +18,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 </head>
 <body>
-<div class="container-fluid d-flex justify-content-center align-items-center vh-100"> <!-- Вирівнювання по центру та зроблення календаря більшим на всю висоту екрану -->
-    <div class="container mt-4 text-center">
+<div class="container-fluid d-flex justify-content-center align-items-center"> <!-- Вирівнювання по центру та зроблення календаря більшим на всю висоту екрану -->
+    <div class="container mt-2 text-center">
         <h3>Календар</h3>
+        <h4>{{text}}</h4>
         <form method="post">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
+            <div class="row justify-content-center align-items-center">
+                <div class="justify-content-center align-items-center ">
                     <div id="calendar"></div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div>
                     <input type="hidden" class="form-control" id="selected-dates" name="selected-dates">
                 </div>
-                <div class="col-md-6">
-                    <button class="btn" type="submit" style="background-color:#009688; color: white;"> Зберегти</button>
+                <div class="col">
+                    <button class="btn mt-3" type="submit" style="background-color:#009688; color: white;"> Далі</button>
                 </div>
             </div>
         </form>
