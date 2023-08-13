@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 def generate_weekly_schedule_template(date_list):
     # Розбиваємо рядок на список дат
     dates = date_list.split(',')

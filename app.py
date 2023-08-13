@@ -492,7 +492,12 @@ def timesettings(botusername, phone):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
-        dao.create_time_settings(phone, is_two_graph=request.form['secondShiftCheckbox'], start_time=request.form['firstShiftStart'], end_time=request.form['firstShiftEnd'], start_time_two=request.form['secondShiftStart'], end_time_two=request.form['secondShiftEnd'], bot_username=botusername)
+        if request.form['secondShiftCheckbox']=='on':
+            dao.create_time_settings(phone, is_two_graph=request.form['secondShiftCheckbox'], start_time=request.form['firstShiftStart'], end_time=request.form['firstShiftEnd'], start_time_two=request.form['secondShiftStart'], end_time_two=request.form['secondShiftEnd'], bot_username=botusername)
+        else:
+            dao.create_time_settings(phone, is_two_graph=request.form['secondShiftCheckbox'],
+                                     start_time=request.form['firstShiftStart'], end_time=request.form['firstShiftEnd'],
+                                    bot_username=botusername)
         return redirect('/calendar_month/'+ botusername + "/" + phone)
     else:
         return render_template('time_settings.html', botusername=botusername)
