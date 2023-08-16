@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-          name="viewport">
-    <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <title>Календар</title>
-        <style>
+{% extends 'base.html' %}
+
+{% block title %}
+Календар
+{% endblock %}
+
+ <style>
         /* Збільшуємо розмір календаря в 1.5 рази */
         #calendar {
             transform: scale(1.35);
@@ -24,8 +22,9 @@
     <!-- Підключення Bootstrap Datepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-</head>
-<body>
+
+{% block body %}
+
 <div class="container-fluid d-flex justify-content-center align-items-center"> <!-- Вирівнювання по центру та зроблення календаря більшим на всю висоту екрану -->
     <div class="container mt-2 text-center">
         <h3>Календар</h3>
@@ -76,6 +75,4 @@
         });
     });
 </script>
-
-</body>
-</html>
+{% endblock %}

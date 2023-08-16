@@ -469,6 +469,10 @@ def profile(botusername, id, phone):
             filename = botusername + '_' + str(id) +'_' + photo.filename
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             print(filepath)
+            selected_options = request.form.getlist('multiSelect')
+            if len(selected_options)>0:
+                dao.update_employee_service(phone,selected_options,botusername)
+            print(selected_options)
             filename = secure_filename(photo.filename)
             photo.save(filename)
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
@@ -477,7 +481,11 @@ def profile(botusername, id, phone):
             dao.update_employee(request.form['name'], request.form['phone'], request.form['specialization'],
                                 id, request.form['about'], request.form['photo'], request.form['email'], botusername)
     employee = dao.get_employee_by_phone(phone, botusername)
-    return render_template('profile.html', employee= employee, botusername= botusername)
+    all_service = dao.get_service(botusername)
+    my_service = dao.get_employee_service(phone, botusername)
+    if my_service==None:
+        my_service=[]
+    return render_template('profile.html', employee= employee, botusername= botusername, all_service=all_service, my_service= my_service)
 
 
 @app.route("/timesettings/<botusername>/<phone>", methods=['POST', 'GET'])

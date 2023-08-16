@@ -71,12 +71,12 @@ User Profile Settings
       <input type="text" class="form-control" id="profession" name="specialization" value="{{employee[3]}}">
     </div>
 <div class="form-group mb-2">
-<label for="selectpicker">Доступні послуги</label>
-    <select class="selectpicker" id="selectpicker" name="services[]" multiple data-live-search="true">
-        <option value="Service 1">Service 1</option>
-        <option value="Service 2">Service 2</option>
-        <option value="Service 3">Service 3</option>
-        <!-- Додайте інші послуги за потребою -->
+
+      <label for="multiSelect">Виберіть послуги:</label>
+      <select multiple class="custom-select" id="multiSelect" size="3" name="multiSelect">
+         {% for service in all_service  %}
+        <option value="{{ service[1] }}" {% if service[1] in my_service %}selected{% endif %}>{{ service[1] }}</option>
+        {% endfor %}
     </select>
 
 </div>

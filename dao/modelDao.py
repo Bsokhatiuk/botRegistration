@@ -23,6 +23,8 @@ def db_start():
         "CREATE TABLE IF NOT EXISTS time_settings (phone TEXT, is_two_graph TEXT, start_time TEXT, end_time TEXT, start_time_two TEXT, end_time_two TEXT, bot_username TEXT)")
     cur.execute(
         "CREATE TABLE IF NOT EXISTS wekly_settings (phone TEXT, template_one BLOB, template_two BLOB, bot_username TEXT)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS employee_service (phone TEXT,service_name TEXT, bot_username TEXT)")
     db.commit()
 
 
@@ -171,5 +173,27 @@ def get_wekly_settings(phone, bot_username=''):
     user = cur.execute("SELECT * FROM wekly_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
     return user
 
+def create_employee_service(phone, service_name_list, bot_username=''):
+    employee_service = cur.execute("SELECT * FROM employee_service WHERE phone='{key}' and bot_username='{key2}'".format(key=phone, key2=bot_username)).fetchall()
+    if not employee_service:
+        for service_name in service_name_list:
+            cur.execute("INSERT INTO employee_service VALUES (?, ?, ?)", (phone, service_name, bot_username))
+    db.commit()
 
+def delete_employee_service(phone, bot_username=""):
+    try:
+        cur.execute("DELETE FROM employee_service WHERE phone='{key}' and bot_username='{key2}' ".format(key=phone, key2=bot_username))
+        db.commit()
+    except Exception as err:
+        print(err)
+
+def update_employee_service(phone, service_name_list=[], bot_username=''):
+    delete_employee_service(phone, bot_username)
+    for service_name in service_name_list:
+        cur.execute("INSERT INTO employee_service VALUES (?, ?, ?)", (phone, service_name, bot_username))
+    db.commit()
+
+def get_employee_service(phone, bot_username=''):
+    user = cur.execute("SELECT service_name FROM employee_service WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
+    return user
 
