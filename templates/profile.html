@@ -4,7 +4,9 @@
 User Profile Settings
 {% endblock %}
 {% block style %}
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- ... інші теги <meta> і <title> ... -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0/css/bootstrap-select.min.css">
   <style>
     body {
       padding: 0px;
@@ -37,12 +39,17 @@ User Profile Settings
 
 
 {% block body %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0/js/bootstrap-select.min.js"></script>
   <div class="container mt-4" style="top:0">
       <div class="d-flex justify-content-between">
       <h3>Профіль</h3>
         <div class="rounded-circle overflow-hidden" style="max-width: 40px; max-height: 60px;">
-        <img id="photoPreview" src="{{url_for('static',filename='/img/{{employee[6]}}') }}" alt="Фото" class="img-fluid" style="width: 100%; height: 100%;">
-      </div>
+            <label for="photo" style="cursor: pointer;">
+                <img id="photoPreview" src="{{url_for('static',filename='/img/{{employee[6]}}') }}" alt="Фото" class="img-fluid" style="width: 100%; height: 100%;">
+            </label>
+        </div>
 
     </div>
   <form method="post" id="profileForm" enctype="multipart/form-data">
@@ -63,19 +70,27 @@ User Profile Settings
       <label for="profession">Спеціалізація</label>
       <input type="text" class="form-control" id="profession" name="specialization" value="{{employee[3]}}">
     </div>
-    <div class="form-group mb-2">
+<div class="form-group mb-2">
+<label for="selectpicker">Доступні послуги</label>
+    <select class="selectpicker" id="selectpicker" name="services[]" multiple data-live-search="true">
+        <option value="Service 1">Service 1</option>
+        <option value="Service 2">Service 2</option>
+        <option value="Service 3">Service 3</option>
+        <!-- Додайте інші послуги за потребою -->
+    </select>
+
+</div>
+    <div class="form-group mb-2" style="pading:20px 20px 20px 20px">
       <label for="about">Про себе</label>
       <textarea class="form-control" id="about" name="about" rows="3">{{employee[4]}}</textarea>
     </div>
-    <div class="form-group mb-2">
-      <label for="photo">Завантажити фото</label>
-      <input type="file" class="form-control-file" id="photo" name="photo">
-
-    </div>
+    <input type="file" class="form-control-file d-none" id="photo" name="photo">
     <div class="d-flex justify-content-between align-items-center">
       <button type="submit" class="btn" id="saveButton" style="background-color:#009688; color: white;">Зберегти зміни</button>
       <a type="button" href="/timesettings/{{botusername}}/{{employee[2]}}" class="btn" id="detailsButton" style="background-color:#009688; color: white;">Робочий графік</a>
     </div>
+
+  <div style="height: 70px;"></div>
     </form>
   </div>
 
@@ -83,15 +98,25 @@ User Profile Settings
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-    // Show photo preview on file input change
-    $("#photo").change(function() {
-      if (this.files && this.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          $("#photoPreview").attr("src", e.target.result).removeClass("d-none");
-        };
-        reader.readAsDataURL(this.files[0]);
-      }
+    $(document).ready(function () {
+        $('#services').selectpicker();
+
+        // ... інші обробники подій та код JavaScript ...
+    });
+
+
+    // При виборі файлу встановлюємо підходяще зображення
+    $("#photo").change(function () {
+        var file = $(this)[0].files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#photoPreview").attr("src", e.target.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            $("#photoPreview").attr("src", "{{url_for('static', filename='img/empty_photo.png')}}");
+        }
     });
 
     // Enable editing of form fields

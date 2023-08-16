@@ -503,6 +503,25 @@ def timesettings(botusername, phone):
         return render_template('time_settings.html', botusername=botusername)
 
 
+@app.route("/calendar_month/<botusername>/<phone>/2", methods=['POST', 'GET'])
+def calendar_month_two(botusername, phone):
+    session['botusername'] = botusername
+    if 'history' in session:
+        history = session['history']
+        history.append(request.endpoint)
+    else:
+        history = [request.endpoint]
+    session['history'] = history
+    path = '/'.join(history)
+    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
+    if request.method == "POST":
+        template_month = ut.generate_weekly_schedule_template(request.form['selected-dates'])
+        dao.create_wekly_settings(phone, template_one=template_month,  bot_username=botusername)
+        print('hel')
+        return redirect('/schedule/'+botusername+'/'+phone)
+    else:
+        return render_template('calendar_month.html', botusername=botusername, text='Заповність всій календар на 4 тижні по другій зміні')
+
 @app.route("/calendar_month/<botusername>/<phone>", methods=['POST', 'GET'])
 def calendar_month(botusername, phone):
     session['botusername'] = botusername
@@ -526,23 +545,7 @@ def calendar_month(botusername, phone):
         return render_template('calendar_month.html', botusername=botusername, text='Заповність всій календар на 4 тижні по першій зміні')
 
 
-@app.route("/calendar_month/<botusername>/<phone>/2", methods=['POST', 'GET'])
-def calendar_month_two(botusername, phone):
-    session['botusername'] = botusername
-    if 'history' in session:
-        history = session['history']
-        history.append(request.endpoint)
-    else:
-        history = [request.endpoint]
-    session['history'] = history
-    path = '/'.join(history)
-    logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
-    if request.method == "POST":
-        template_month = ut.generate_weekly_schedule_template(request.form['selected-dates'])
-        dao.create_wekly_settings(phone, template_one=template_month,  bot_username=botusername)
-        return render_template('schedule.html', botusername=botusername)
-    else:
-        return render_template('calendar_month.html', botusername=botusername, text='Заповність всій календар на 4 тижні по другій зміні')
+
 
 
 
@@ -552,8 +555,8 @@ booked_slots = {
         (10, 2): "Jane Smith"
         # Add more booked slots here
     }
-@app.route('/schedule', methods=['POST', 'GET'])
-def schedule():
+@app.route('/schedule/<botusername>/<phone>', methods=['POST', 'GET'])
+def schedule(botusername, phone):
 
     if request.method == 'POST':
 
@@ -575,8 +578,8 @@ def schedule():
     print(booked_slots)
     return render_template('schedule.html', booked_slots=booked_slots)
 
-@app.route('/schedule/del', methods=['POST'])
-def schedule_action():
+@app.route('/schedule/<botusername>/<phone>/del', methods=['POST'])
+def schedule_action(botusername, phone):
     if request.method == 'POST':
         patient_day = request.form.get('appointmentDay')
         patient_hour = request.form.get('appointmentTime')

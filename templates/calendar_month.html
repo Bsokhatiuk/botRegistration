@@ -6,7 +6,15 @@
           name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Календар</title>
+        <style>
+        /* Збільшуємо розмір календаря в 1.5 рази */
+        #calendar {
+            transform: scale(1.35);
+            transform-origin: top left;
+        }
 
+        /* ... інші CSS стилі ... */
+    </style>
     <!-- Підключення jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -37,6 +45,7 @@
                     <button class="btn mt-3" type="submit" style="background-color:#009688; color: white;"> Далі</button>
                 </div>
             </div>
+              <div style="height: 70px;"></div>
         </form>
     </div>
 </div>
