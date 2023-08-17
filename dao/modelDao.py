@@ -194,6 +194,6 @@ def update_employee_service(phone, service_name_list=[], bot_username=''):
     db.commit()
 
 def get_employee_service(phone, bot_username=''):
-    user = cur.execute("SELECT service_name FROM employee_service WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
+    user = cur.execute("SELECT service_name FROM employee_service WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchall()
     return user
 

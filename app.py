@@ -485,6 +485,7 @@ def profile(botusername, id, phone):
     employee = dao.get_employee_by_phone(phone, botusername)
     all_service = dao.get_service(botusername)
     my_service = dao.get_employee_service(phone, botusername)
+    print(my_service)
     if my_service==None:
         my_service=[]
     return render_template('profile.html', employee= employee, botusername= botusername, all_service=all_service, my_service= my_service)
