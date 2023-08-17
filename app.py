@@ -21,6 +21,8 @@ app.secret_key = token
 
 UPLOAD_FOLDER = '/app/static/img'  # Папка для зберігання завантажених фотографій
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.path.join(app.config['UPLOAD_FOLDER'])
+
 
 # from aiogram import Bot, Dispatcher, types, executor
 # from config import TOKEN_API
