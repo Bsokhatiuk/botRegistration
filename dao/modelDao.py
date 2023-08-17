@@ -25,6 +25,8 @@ def db_start():
         "CREATE TABLE IF NOT EXISTS wekly_settings (phone TEXT, template_one BLOB, template_two BLOB, bot_username TEXT)")
     cur.execute(
         "CREATE TABLE IF NOT EXISTS employee_service (phone TEXT,service_name TEXT, bot_username TEXT)")
+    cur.execute(
+        "CREATE TABLE IF NOT EXISTS user_books (record_id INTEGER NOT NULL, user_id TEXT, user_name TEXT. user_phone TEXT, phone_employee TEXT,service_name TEXT,cr_date, TEXT date TEXT, hour INTEGER, status TEXT, bot_username TEXT)")
     db.commit()
 
 
@@ -194,6 +196,23 @@ def update_employee_service(phone, service_name_list=[], bot_username=''):
     db.commit()
 
 def get_employee_service(phone, bot_username=''):
-    user = cur.execute("SELECT service_name FROM employee_service WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchall()
-    return user
+    service_name_list = cur.execute("SELECT service_name FROM employee_service WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchall()
+    fin_list = []
+    for service_name in service_name_list:
+        fin_list.append(service_name[0])
+    return fin_list
 
+
+
+def create_user_books(user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status='', bot_username=''):
+    cur.execute("INSERT INTO  user_books VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (None, user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status, bot_username))
+    db.commit()
+
+def update_user_books(record_id, user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status=''):
+    cur.execute("UPDATE user_books SET user_id='{}', user_name='{}', user_phone='{}', phone_employee='{}', service_name='{}', cr_date='{}', date='{}', hour='{}', status='{}' WHERE phone='{}'".format(user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status, record_id))
+    db.commit()
+
+
+def get_user_books(phone, bot_username=''):
+    user = cur.execute("SELECT * FROM time_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
+    return user
