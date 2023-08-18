@@ -44,4 +44,38 @@ def generate_weekly_schedule_template(date_list):
             current_week_template['Su'] = 1
 
     weekly_schedule_template[current_week] = current_week_template
-    return weekly_schedule_template
+    return weekly_schedule_template, list_dates[0].strftime('%Y-%m-%d')
+
+
+from datetime import datetime, timedelta
+
+
+def generate_schedule(template, start_date, current_date):
+    days_passed = (current_date - start_date).days
+    week_days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+    template_keys = list(template.keys())
+    current_week = template_keys[(days_passed // 7) % len(template_keys)]
+    shift_template = template[current_week]
+    schedule_for_day = shift_template[week_days[current_date.weekday()]]
+    return bool(schedule_for_day)
+
+
+
+def get_format_date(date_string):
+    uk_day_names = {
+        0: 'Пн',
+        1: 'Вт',
+        2: 'Ср',
+        3: 'Чт',
+        4: 'Пт',
+        5: 'Сб',
+        6: 'Нд'
+    }
+    date_object = datetime.strptime(date_string, '%Y-%m-%d')
+    day_name = uk_day_names[date_object.weekday()]
+    if date_object.month < 10:
+        month_name = '0' + str(date_object.month)
+    else:
+        month_name = str(date_object.month)
+    formatted_date = f'{day_name} {date_object.day:02d}.{month_name}'
+    return formatted_date

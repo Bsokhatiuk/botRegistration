@@ -26,7 +26,7 @@ def db_start():
     cur.execute(
         "CREATE TABLE IF NOT EXISTS employee_service (phone TEXT,service_name TEXT, bot_username TEXT)")
     cur.execute(
-        "CREATE TABLE IF NOT EXISTS user_books (record_id INTEGER NOT NULL, user_id TEXT, user_name TEXT. user_phone TEXT, phone_employee TEXT,service_name TEXT,cr_date, TEXT date TEXT, hour INTEGER, status TEXT, bot_username TEXT)")
+        "CREATE TABLE IF NOT EXISTS user_books (record_id INTEGER NOT NULL, user_id TEXT, user_name TEXT, user_phone TEXT, phone_employee TEXT,service_name TEXT,cr_date, TEXT date TEXT, hour INTEGER, status TEXT, bot_username TEXT)")
     db.commit()
 
 
@@ -158,18 +158,16 @@ def get_time_settings(phone, bot_username=''):
     return user
 
 
-def create_wekly_settings(phone, template_one='', template_two='', bot_username=''):
-    user = cur.execute("SELECT * FROM time_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone, key2=bot_username)).fetchone()
-    if not user:
-        cur.execute("INSERT INTO  wekly_settings VALUES (?, ?, ?, ?, ?, ?, ?)", (phone, template_one, template_two, bot_username))
-        db.commit()
-
-def update_wekly_settings_one(phone, template_one='', bot_username=''):
-    cur.execute("UPDATE wekly_settings SET template_one='{}' WHERE phone='{}' and bot_username={}".format(template_one, phone, bot_username))
+def create_wekly_settings(phone, start_date_one, template_one='', start_date_two='', template_two='', bot_username=''):
+    cur.execute("INSERT INTO  wekly_settings VALUES (?, ?, ?, ?, ?, ?)", (phone,start_date_one, template_one, start_date_two, template_two, bot_username))
     db.commit()
 
-def update_wekly_settings_two(phone, template_two='', bot_username=''):
-    cur.execute("UPDATE wekly_settings SET template_twp='{}' WHERE phone='{}' and bot_username={}".format(template_two, phone, bot_username))
+def update_wekly_settings_one(phone, start_date_one, template_one='', bot_username=''):
+    cur.execute("UPDATE wekly_settings SET template_one='{}', start_date_one='{}' WHERE phone='{}' and bot_username='{}'".format(template_one, start_date_one, phone, bot_username))
+    db.commit()
+
+def update_wekly_settings_two(phone, start_date_two, template_two='', bot_username=''):
+    cur.execute("UPDATE wekly_settings SET template_two='{}', start_date_two='{}' WHERE phone='{}' and bot_username='{}'".format(template_two, start_date_two, phone, bot_username))
     db.commit()
 def get_wekly_settings(phone, bot_username=''):
     user = cur.execute("SELECT * FROM wekly_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
@@ -213,6 +211,15 @@ def update_user_books(record_id, user_id, user_name, user_phone, phone_employee,
     db.commit()
 
 
-def get_user_books(phone, bot_username=''):
-    user = cur.execute("SELECT * FROM time_settings WHERE phone='{key}' and bot_username='{key2}'".format(key=phone,key2=bot_username)).fetchone()
+def get_user_books_by_record(record_id):
+    user = cur.execute("SELECT * FROM user_books WHERE record_id='{key}'".format(key=record_id)).fetchone()
+    return user
+
+
+def get_user_books_by_user(user_id, bot_username=''):
+    user = cur.execute("SELECT * FROM user_books WHERE user_id='{key}' and bot_username='{key2}'".format(key=user_id, key2=bot_username)).fetchall()
+    return user
+
+def get_user_books_by_employee(phone_employee, bot_username=''):
+    user = cur.execute("SELECT * FROM user_books WHERE phone_employee='{key}' and bot_username='{key2}'".format(key=phone_employee, key2=bot_username)).fetchall()
     return user

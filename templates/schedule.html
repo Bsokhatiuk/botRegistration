@@ -17,16 +17,16 @@
         <thead>
             <tr>
                 <th></th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
+                {% for dates in format_dates %}
+                <th>{{dates}}</th>
+                {% endfor %}
             </tr>
         </thead>
 <tbody>
-    {% for hour in range(9, 18) %}
+    {% for hour in range(start_day_hour, end_day_hour+1) %}
         <tr>
             <th>{{ hour }}:00</th>
-            {% for day in range(1, 4) %}
+            {% for day in dates %}
                 <td data-toggle="modal" data-target="#bookingModal" class="clickable" data-slot="{{ hour }}_{{ day }}">
                     {% if (hour, day) in booked_slots %}
                         <div class="booked-slot text-danger" data-patient="{{ booked_slots[(hour, day)] }}">Зайнято</div>
@@ -59,27 +59,29 @@
                         <input type="text" class="form-control" id="patientName" name="patientName">
                     </div>
                     <div class="form-group">
+                        <label for="patientPhone">Patient Phone</label>
                         <input type="text" class="form-control" id="patientPhone" name="patientPhone" >
                     </div>
                     <div class="form-group">
+                        <label for="appointmentDay">Day</label>
                         <input type="text" class="form-control" id="appointmentDay" name="appointmentDay">
                     </div>
                     <div class="form-group">
+                        <label for="appointmentTime">Hour</label>
                         <input type="text" class="form-control" id="appointmentTime" name="appointmentTime" >
                     </div>
                     <div class="form-group">
-                        <label for="service">Service</label>
-                        <select class="form-control" id="service" name="service">
-                            <option value="Service 1">Service 1</option>
-                            <option value="Service 2">Service 2</option>
-                            <option value="Service 3">Service 3</option>
-                            <!-- Додайте інші послуги за потребою -->
+                        <label for="multiSelect">Service</label>
+                          <select multiple class="custom-select" id="multiSelect" size="3" name="multiSelect">
+                             {% for service in all_service  %}
+                            <option value="{{ service[1] }}">{{ service[1] }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary" id="bookButton">Book</button>
                         <button type="button" class="btn btn-danger" id="cancelButton">Cancel</button>
-                        <button type="button" class="btn" id="reBook">reBook</button>
+                        <button type="button" class="btn" id="reBook" style="background-color:#009688; color: white;">reBook</button>
                     </div>
                 </form>
             </div>
@@ -99,16 +101,23 @@ $(document).ready(function () {
             return; // Блокуємо можливість бронювання для недоступних комірок
         }
         if (hasData) {
-            var bookedPatient = cell.find(".booked-slot").data("patient");
-            $("#patientName").val(bookedPatient);
+              var bookedPatientString = cell.find(".booked-slot").data("patient");
+            var correctedJSON = bookedPatientString.replace(/'/g, '"'); // Заміна апострофів на подвійні лапки
+            var bookedPatient = JSON.parse(correctedJSON);
+
+            var patientName = bookedPatient.name;
+            var patientPhone = bookedPatient.phone;
+
+            $("#patientName").val(patientName);
+            $("#patientPhone").val(patientPhone);
         } else {
             $("#patientName").val("");
             $("#bookButton").prop("disabled", false);
         }
 
         var dayTime = selectedSlot.split("_");
-        var day = dayTime[0];
-        var time = dayTime[1];
+        var time = dayTime[0];
+        var day = dayTime[1];
 
         $("#appointmentDay").val(day);
         $("#appointmentTime").val(time);

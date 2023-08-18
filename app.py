@@ -1,4 +1,6 @@
 import asyncio
+from datetime import datetime, timedelta
+
 from flask import Flask, render_template, request,redirect, session
 import dao.modelDao as dao
 import json
@@ -7,6 +9,8 @@ import secrets
 import logging
 import os
 from werkzeug.utils import secure_filename
+import json
+
 
 # logging.basicConfig(filename='app_web.log',
 #                     filemode='a',
@@ -526,9 +530,10 @@ def calendar_month_two(botusername, phone):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
+        template_month, dater = ut.generate_weekly_schedule_template(request.form['selected-dates'])
+        json_string = json.dumps(template_month)
         template_month = ut.generate_weekly_schedule_template(request.form['selected-dates'])
-        dao.create_wekly_settings(phone, template_one=template_month,  bot_username=botusername)
-        print('hel')
+        dao.update_wekly_settings_two(phone, dater, template_two=json_string,  bot_username=botusername)
         return redirect('/schedule/'+botusername+'/'+phone)
     else:
         return render_template('calendar_month.html', botusername=botusername, text='Заповність всій календар на 4 тижні по другій зміні')
@@ -545,8 +550,9 @@ def calendar_month(botusername, phone):
     path = '/'.join(history)
     logging.info(f"botusername='{botusername}'; path='{path}';  user_agent='{request.user_agent}'; ip={request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)}")
     if request.method == "POST":
-        template_month = ut.generate_weekly_schedule_template(request.form['selected-dates'])
-        dao.create_wekly_settings(phone, template_one=template_month,  bot_username=botusername)
+        template_month, dater = ut.generate_weekly_schedule_template(request.form['selected-dates'])
+        json_string = json.dumps(template_month)
+        dao.create_wekly_settings(phone, dater, template_one=json_string,  bot_username=botusername)
         time_setting = dao.get_time_settings(phone, botusername)
         if time_setting[1]=='off':
             return render_template('exit.html', botusername=botusername)
@@ -562,15 +568,41 @@ def calendar_month(botusername, phone):
 
 
 booked_slots = {
-        (9, 1): "John Doe",
-        (10, 2): "Jane Smith"
+        (9, '2023-08-18'): {"name": "Jane Smith", "phone": "38034034444"},
+
+        (10, '2023-08-19'): {"name": "Jane Smith", "phone": "38034034444"}
         # Add more booked slots here
     }
 @app.route('/schedule/<botusername>/<phone>', methods=['POST', 'GET'])
 def schedule(botusername, phone):
+    date = datetime.today()
+    date_next = date + timedelta(days=1)
+    date_plus = date_next + timedelta(days=1)
+    data_str = date.strftime('%Y-%m-%d')
+    data_next_str = date_next.strftime('%Y-%m-%d')
+    data_plus_str = date_plus.strftime('%Y-%m-%d')
+    dates = [data_str, data_next_str, data_plus_str]
+    print(dates)
+    format_dates = [ut.get_format_date(data_str), ut.get_format_date(data_next_str), ut.get_format_date(data_plus_str)]
+    employee_service = dao.get_employee_service(phone, botusername)
+    time_settings = dao.get_time_settings(phone, botusername)
+    day_settings = dao.get_wekly_settings(phone, botusername)
+    records = dao.get_user_books_by_employee(phone, botusername)
+    all_service = dao.get_service(botusername)
+    ph, two_schedule, start, end, start_2, end2, _ = time_settings
+    if two_schedule=='on':
+        start_day_hour = min(int(start[:2]), int(start_2[:2]))
+        end_day_hour = max(int(end[:2]), int(end2[:2]))
+    else:
+        start_day_hour = int(start[:2])
+        end_day_hour = int(end[:2])
+    print('employee_service', employee_service)
+    print('time_settings', time_settings)
+    print('day_settings', day_settings)
+    print('records', records)
+
 
     if request.method == 'POST':
-
         selected_slot = request.form.get('selectedSlot')
         patient_name = request.form.get('patientName')
         patient_day = request.form.get('appointmentDay')
@@ -581,13 +613,56 @@ def schedule(botusername, phone):
         booked_slots[(patient_day,patient_hour)] = patient_name
         # Отримання дати та часу з обраного слоту
         print(patient_name)
-
-
         if selected_slot and patient_name:
             print(f"Slot {selected_slot} booked by {patient_name}")
-
     print(booked_slots)
-    return render_template('schedule.html', booked_slots=booked_slots)
+    return render_template('schedule.html', booked_slots=booked_slots, botusername= botusername, phone=phone, start_day_hour=start_day_hour, end_day_hour=end_day_hour, format_dates=format_dates, dates = dates, all_service= all_service)
+
+
+
+@app.route('/schedule/<botusername>/<phone>/<date>', methods=['POST', 'GET'])
+def schedule_day(botusername, phone, date):
+    date = datetime.strptime(date, '%Y-%m-%d')
+    date_next = date + timedelta(days=1)
+    date_plus = date_next + timedelta(days=1)
+    data_str = date.strftime('%Y-%m-%d')
+    data_next_str = date_next.strftime('%Y-%m-%d')
+    data_plus_str = date_plus.strftime('%Y-%m-%d')
+    format_dates = [ut.get_format_date(data_str), ut.get_format_date(data_next_str), ut.get_format_date(data_plus_str)]
+    employee_service = dao.get_employee_service(phone, botusername)
+    time_settings = dao.get_time_settings(phone, botusername)
+    day_settings = dao.get_wekly_settings(phone, botusername)
+    records = dao.get_user_books_by_employee(phone, botusername)
+
+    ph, two_schedule, start, end, start_2, end2, _ = time_settings
+    if two_schedule=='on':
+        start_day_hour = min(int(start[:2]), int(start_2[:2]))
+        end_day_hour = max(int(end[:2]), int(end2[:2]))
+    else:
+        start_day_hour = int(start[:2])
+        end_day_hour = int(end[:2])
+    print('employee_service', employee_service)
+    print('time_settings', time_settings)
+    print('day_settings', day_settings)
+    print('records', records)
+
+
+    if request.method == 'POST':
+        selected_slot = request.form.get('selectedSlot')
+        patient_name = request.form.get('patientName')
+        patient_day = request.form.get('appointmentDay')
+        patient_hour = request.form.get('appointmentTime')
+        patient_service = request.form.get('service')
+        patient_hour = int(patient_hour)
+        patient_day = int(patient_day)
+        booked_slots[(patient_day,patient_hour)] = patient_name
+        # Отримання дати та часу з обраного слоту
+        print(patient_name)
+        if selected_slot and patient_name:
+            print(f"Slot {selected_slot} booked by {patient_name}")
+    print(booked_slots)
+    return render_template('schedule.html', booked_slots=booked_slots, botusername= botusername, phone=phone, start_day_hour=start_day_hour, end_day_hour=end_day_hour, format_dates=format_dates)
+
 
 @app.route('/schedule/<botusername>/<phone>/del', methods=['POST'])
 def schedule_action(botusername, phone):
