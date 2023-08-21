@@ -12,7 +12,9 @@
             transform: scale(1.35);
             transform-origin: top left;
         }
-
+          .highlighted-date {
+            background-color: #009688; /* Жовтий колір або інший, який ви хочете використати */
+        }
         /* ... інші CSS стилі ... */
     </style>
     <!-- Підключення jQuery -->
@@ -31,7 +33,7 @@
         <h3>Календар</h3>
         <h4>{{text}}</h4>
         <form method="post">
-            <div class="row justify-content-center align-items-center col-md-8" style="margin-left: 5%;">
+            <div class="row justify-content-center align-items-center col-md-8">
                 <div class="justify-content-center align-items-center col-md-8">
                     <div id="calendar"></div>
                 </div>
@@ -59,7 +61,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.uk.min.js"></script> <!-- Додано локалізацію для української мови -->
 
 <script>
-    $(document).ready(function() {
+  $(document).ready(function() {
         // Ініціалізація календаря
         $('#calendar').datepicker({
             multidate: true,
@@ -73,6 +75,28 @@
         $('#calendar').on('changeDate', function() {
             var selectedDates = $('#calendar').datepicker('getFormattedDate');
             $('#selected-dates').val(selectedDates);
+        });
+
+        // Виділення дат з класом "highlighted-date"
+        var highlightedDates = ['2023-08-21', '2023-08-24']; // Ваш список виділених дат
+
+        // Додаємо клас для кожної виділеної дати
+        highlightedDates.forEach(function(date) {
+            var timestamp = new Date(date).getTime();
+            $('.datepicker-days td[data-date="' + timestamp + '"]').addClass('highlighted-date');
+        });
+
+        // Додаємо клас під час відображення кожної дати
+        $('#calendar').datepicker().on('changeMonth', function () {
+            setTimeout(function () {
+                $('.datepicker-days tbody td').each(function () {
+                    var timestamp = parseInt($(this).data('date'));
+                    var date = new Date(timestamp).toISOString().split('T')[0];
+                    if (highlightedDates.includes(date)) {
+                        $(this).addClass('highlighted-date');
+                    }
+                });
+            }, 0);
         });
     });
 </script>

@@ -26,7 +26,7 @@ def db_start():
     cur.execute(
         "CREATE TABLE IF NOT EXISTS employee_service (phone TEXT,service_name TEXT, bot_username TEXT)")
     cur.execute(
-        "CREATE TABLE IF NOT EXISTS user_books (record_id INTEGER NOT NULL, user_id TEXT, user_name TEXT, user_phone TEXT, phone_employee TEXT,service_name TEXT,cr_date, TEXT date TEXT, hour INTEGER, status TEXT, bot_username TEXT)")
+        "CREATE TABLE IF NOT EXISTS user_books (record_id INTEGER NOT NULL, user_id TEXT, user_name TEXT, user_phone TEXT, phone_employee TEXT,service_name TEXT,cr_date, TEXT book_date TEXT, comment TEXT, status TEXT, bot_username TEXT)")
     db.commit()
 
 
@@ -202,12 +202,12 @@ def get_employee_service(phone, bot_username=''):
 
 
 
-def create_user_books(user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status='', bot_username=''):
-    cur.execute("INSERT INTO  user_books VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (None, user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status, bot_username))
+def create_user_books(user_id, user_name, user_phone, phone_employee, service_name, cr_date,book_date, comment, status='', bot_username=''):
+    cur.execute("INSERT INTO  user_books VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (None, user_id, user_name, user_phone, phone_employee, service_name, cr_date,book_date, comment, status, bot_username))
     db.commit()
 
-def update_user_books(record_id, user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status=''):
-    cur.execute("UPDATE user_books SET user_id='{}', user_name='{}', user_phone='{}', phone_employee='{}', service_name='{}', cr_date='{}', date='{}', hour='{}', status='{}' WHERE phone='{}'".format(user_id, user_name, user_phone, phone_employee, service_name, cr_date,date, hour, status, record_id))
+def update_user_books(record_id, user_id, user_name, user_phone, phone_employee, service_name, cr_date,book_date, comment, status=''):
+    cur.execute("UPDATE user_books SET user_id='{}', user_name='{}', user_phone='{}', phone_employee='{}', service_name='{}', cr_date='{}', date='{}', hour='{}', status='{}' WHERE phone='{}'".format(user_id, user_name, user_phone, phone_employee, service_name, cr_date,book_date, comment, status, record_id))
     db.commit()
 
 

@@ -1,7 +1,7 @@
 import asyncio
 from datetime import datetime, timedelta
 
-from flask import Flask, render_template, request,redirect, session
+from flask import Flask, render_template, request,redirect, session, send_from_directory
 import dao.modelDao as dao
 import json
 from utils import util as ut
@@ -23,9 +23,10 @@ app = Flask(__name__)
 token = secrets.token_bytes(32)
 app.secret_key = token
 
-UPLOAD_FOLDER = '/app/static/img'  # Папка для зберігання завантажених фотографій
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.path.join(app.config['UPLOAD_FOLDER'])
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'])
 
 
 # from aiogram import Bot, Dispatcher, types, executor
@@ -568,9 +569,9 @@ def calendar_month(botusername, phone):
 
 
 booked_slots = {
-        (9, '2023-08-18'): {"name": "Jane Smith", "phone": "38034034444"},
+        (9, '2023-08-20'): {"name": "Jane Smith", "phone": "38034034444"},
 
-        (10, '2023-08-19'): {"name": "Jane Smith", "phone": "38034034444"}
+        (10, '2023-08-21'): {"name": "Jane Smith", "phone": "38034034444"}
         # Add more booked slots here
     }
 @app.route('/schedule/<botusername>/<phone>', methods=['POST', 'GET'])
@@ -705,6 +706,32 @@ def savedata():
         status=200,
         )
     return response
+
+
+@app.route('/temp')
+def index_temp():
+    return render_template('temptemp.html')
+
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return "No file part"
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return "No selected file"
+
+    if file:
+        filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(filename)
+        return "File uploaded successfully"
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__=="__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

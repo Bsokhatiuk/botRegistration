@@ -23,16 +23,14 @@
             </tr>
         </thead>
 <tbody>
-    {% for hour in range(start_day_hour, end_day_hour+1) %}
+    {% for hour in range(start_day_hour, end_day_hour * 2 + 1) %}
         <tr>
-            <th>{{ hour }}:00</th>
+            <th>{{ hour // 2 }}:{{ "00" if hour % 2 == 0 else "30" }}</th>
             {% for day in dates %}
-                <td data-toggle="modal" data-target="#bookingModal" class="clickable" data-slot="{{ hour }}_{{ day }}">
-                    {% if (hour, day) in booked_slots %}
-                        <div class="booked-slot text-danger" data-patient="{{ booked_slots[(hour, day)] }}">Зайнято</div>
-                    {% else %}
-                        <!-- Display available slot -->
-                    {% endif %}
+                <td data-toggle="modal" data-target="#bookingModal"
+                    class="clickable {% if (hour // 2, day) in unavailable_slots %}unavailable{% endif %}"
+                    data-slot="{{ (hour // 2) }}_{{ day }}">
+                    <!-- Решта коду для комірки таблиці -->
                 </td>
             {% endfor %}
         </tr>

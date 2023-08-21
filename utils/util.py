@@ -79,3 +79,40 @@ def get_format_date(date_string):
         month_name = str(date_object.month)
     formatted_date = f'{day_name} {date_object.day:02d}.{month_name}'
     return formatted_date
+
+
+class Schedule:
+    def __init__(self, template, start_date, start_time, end_time, cnt_works,
+                 template_two=None, start_date_two=None, start_time_two=None, end_time_two=None, holidays=[], seekdays=[]):
+        self.template = template
+        self.start_date = start_date
+        self.start_time = start_time
+        self.end_time = end_time
+        self.cnt_works = cnt_works
+        self.template_two = template_two
+        self.start_date_two = start_date_two
+        self.start_time_two = start_time_two
+        self.end_time_two = end_time_two
+        self.holidays = holidays
+        self.seekdays = seekdays
+
+    def generate_schedule(self, list_days, list_records):
+        pass
+class Record:
+    def __init__(self, user_id, user_name, user_phone, comment, phone_employee, service,
+                 cr_date, book_datetime, status):
+        self.user_id = user_id
+        self.user_name = user_name
+        self.user_phone = user_phone
+        self.comment = comment
+        self.phone_employee = phone_employee
+        self.service = service
+        self.cr_date = cr_date
+        self.book_datetime = book_datetime
+        self.status = status
+
+class Service():
+    def __init__(self, name, price, duration):
+        self.price = price
+        self.name = name
+        self.duration = duration

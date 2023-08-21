@@ -19,10 +19,10 @@ QR = qrcode.QRCode(
     box_size=10,
     border=4,
 )
-# img = qrcode.make('https://t.me/Online_registration_bot')
+# uploads = qrcode.make('https://t.me/Online_registration_bot')
 
 # with open('qr.svg', 'wb') as qr:
-#     img.save(qr)
+#     uploads.save(qr)
 
 bot = Bot(TOKEN_API)
 dp = Dispatcher(bot)
@@ -118,7 +118,7 @@ async def web_app_data_save(message:types.Message):
         await bot.send_photo(message.from_user.id, qrcode)
     QR.clear()
 
-    # await bot.send_photo(chat_id=message.from_user.id, photo=img)
+    # await bot.send_photo(chat_id=message.from_user.id, photo=uploads)
 
 
 @dp.message_handler(Text(equals=['Navigation Calendar'], ignore_case=True))
