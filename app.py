@@ -23,11 +23,6 @@ app = Flask(__name__)
 token = secrets.token_bytes(32)
 app.secret_key = token
 
-app.config['UPLOAD_FOLDER'] = '/static/uploads'
-
-if not os.path.exists(app.config['UPLOAD_FOLDER']):
-    os.makedirs(app.config['UPLOAD_FOLDER'])
-
 
 # from aiogram import Bot, Dispatcher, types, executor
 # from config import TOKEN_API
@@ -707,31 +702,6 @@ def savedata():
         )
     return response
 
-
-@app.route('/temp')
-def index_temp():
-    return render_template('temptemp.html')
-
-
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'file' not in request.files:
-        return "No file part"
-
-    file = request.files['file']
-
-    if file.filename == '':
-        return "No selected file"
-
-    if file:
-        filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(filename)
-        return "File uploaded successfully"
-
-
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__=="__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
