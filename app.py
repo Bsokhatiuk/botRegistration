@@ -23,7 +23,7 @@ app = Flask(__name__)
 token = secrets.token_bytes(32)
 app.secret_key = token
 
-app.config['UPLOAD_FOLDER'] = '/uploads'
+app.config['UPLOAD_FOLDER'] = '/static/uploads'
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
